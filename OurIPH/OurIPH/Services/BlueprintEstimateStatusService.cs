@@ -9,12 +9,12 @@ namespace OurIPH.Services
             estimate = estimate ?? new BlueprintEstimate();
             if (estimate.InventionMissing)
             {
-                return "РќРµС‚ РґР°РЅРЅС‹С… invention";
+                return "Нет данных invention";
             }
 
             if (missingPrices > 0)
             {
-                return "РќРµС‚ С†РµРЅ: " + missingPrices;
+                return "Нет цен: " + missingPrices;
             }
 
             return estimate.InventionCost > 0 ? "OK + invention" : "OK";
@@ -25,12 +25,12 @@ namespace OurIPH.Services
             estimate = estimate ?? new BlueprintEstimate();
             if (estimate.InventionMissing)
             {
-                return "РќРµС‚ РґР°РЅРЅС‹С… invention";
+                return "Нет данных invention";
             }
 
             if (!hasPriceCache)
             {
-                return "РќРµС‚ РєРµС€Р° С†РµРЅ";
+                return "Нет кеша цен";
             }
 
             return estimate.InventionCost > 0 ? "OK + invention" : "OK";

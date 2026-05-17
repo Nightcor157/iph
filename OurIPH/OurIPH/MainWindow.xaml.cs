@@ -495,12 +495,12 @@ namespace OurIPH
             try
             {
                 databaseStatus.Text = _database.IsDatabaseAvailable()
-                    ? "Р‘Р°Р·Р° РїРѕРґРєР»СЋС‡РµРЅР°: EVEIPH DB.sqlite"
-                    : "Р‘Р°Р·Р° РЅР°Р№РґРµРЅР°, РЅРѕ С‚Р°Р±Р»РёС†С‹ С‡РµСЂС‚РµР¶РµР№ РЅРµ РѕР±РЅР°СЂСѓР¶РµРЅС‹";
+                    ? "База подключена: EVEIPH DB.sqlite"
+                    : "База найдена, но таблицы чертежей не обнаружены";
             }
             catch (Exception ex)
             {
-                databaseStatus.Text = "Р‘Р°Р·Р° РЅРµ РїРѕРґРєР»СЋС‡РµРЅР°: " + ex.Message;
+                databaseStatus.Text = "База не подключена: " + ex.Message;
             }
         }
 
@@ -516,7 +516,7 @@ namespace OurIPH
 
         private void ClearBlueprints_Click(object sender, RoutedEventArgs e)
         {
-            ClearBlueprintResults("РЎРїРёСЃРѕРє С‡РµСЂС‚РµР¶РµР№ РѕС‡РёС‰РµРЅ");
+            ClearBlueprintResults("Список чертежей очищен");
         }
 
         private async void RefreshTopSvr_Click(object sender, RoutedEventArgs e)
@@ -566,7 +566,7 @@ namespace OurIPH
             }
             catch (Exception ex)
             {
-                MessageBox.Show("РќРµ СѓРґР°Р»РѕСЃСЊ РѕР±РЅРѕРІРёС‚СЊ SVR С‡РµСЂРµР· ESI: " + ex.Message, "Our IPH", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Не удалось обновить SVR через ESI: " + ex.Message, "Our IPH", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -635,7 +635,7 @@ namespace OurIPH
             {
                 blueprintsGrid.ScrollIntoView(firstVisible);
             }
-            SetBlueprintListStatus(string.Format("Р—Р°РіСЂСѓР¶РµРЅРѕ С‡РµСЂС‚РµР¶РµР№: {0:N0}", _blueprints.Count));
+            SetBlueprintListStatus(string.Format("Загружено чертежей: {0:N0}", _blueprints.Count));
             SetBlueprintListStatus(GetBlueprintSearchStatus(searchText, _blueprints.Count, visibleBlueprints.Count));
         }
 
@@ -666,7 +666,7 @@ namespace OurIPH
             if (blueprintListStatus != null)
             {
                 blueprintListStatus.Text = string.IsNullOrWhiteSpace(statusText)
-                    ? string.Format("Р§РµСЂС‚РµР¶Рё: {0:N0}", _blueprints.Count)
+                    ? string.Format("Чертежи: {0:N0}", _blueprints.Count)
                     : statusText;
             }
         }
@@ -705,8 +705,8 @@ namespace OurIPH
             blueprint.RequiredSkillsCount = skills.Count;
             blueprint.MissingSkillsCount = missing;
             blueprint.RequiredSkillSummary = missing == 0
-                ? "РќР°РІС‹РєРё OK"
-                : "РќРµ С…РІР°С‚Р°РµС‚: " + string.Join(", ", missingNames) + (missing > missingNames.Count ? "..." : "");
+                ? "Навыки OK"
+                : "Не хватает: " + string.Join(", ", missingNames) + (missing > missingNames.Count ? "..." : "");
         }
 
         private void BlueprintFilter_Changed(object sender, RoutedEventArgs e)
@@ -859,25 +859,25 @@ namespace OurIPH
             {
                 if (loadedCount == 0)
                 {
-                    return string.Format("РџРѕ Р·Р°РїСЂРѕСЃСѓ \"{0}\" РЅРёС‡РµРіРѕ РЅРµ РЅР°Р№РґРµРЅРѕ", searchText);
+                    return string.Format("По запросу \"{0}\" ничего не найдено", searchText);
                 }
 
-                return string.Format("РќР°Р№РґРµРЅРѕ: {0:N0}; РїРѕРєР°Р·Р°РЅРѕ: {1:N0}", loadedCount, visibleCount);
+                return string.Format("Найдено: {0:N0}; показано: {1:N0}", loadedCount, visibleCount);
             }
 
-            return string.Format("Р—Р°РіСЂСѓР¶РµРЅРѕ С‡РµСЂС‚РµР¶РµР№: {0:N0}; РїРѕРєР°Р·Р°РЅРѕ: {1:N0}", loadedCount, visibleCount);
+            return string.Format("Загружено чертежей: {0:N0}; показано: {1:N0}", loadedCount, visibleCount);
         }
 
         private string GetBlueprintFilterStatus(int loadedCount, int visibleCount)
         {
-            var status = string.Format("Р—Р°РіСЂСѓР¶РµРЅРѕ: {0:N0}; РїРѕРєР°Р·Р°РЅРѕ: {1:N0}", loadedCount, visibleCount);
+            var status = string.Format("Загружено: {0:N0}; показано: {1:N0}", loadedCount, visibleCount);
             if (topOnlyBox != null && topOnlyBox.IsChecked == true)
             {
                 var topCount = ReadInt(topBlueprintCountBox == null ? "10" : topBlueprintCountBox.Text, 10);
                 var rankedCount = _blueprints.Count(blueprint => blueprint.ProfitRank > 0);
                 status += rankedCount > 0
-                    ? string.Format("; Top {0} РїРѕ score РёР· {1:N0}", Math.Min(topCount, rankedCount), rankedCount)
-                    : string.Format("; Top {0} РїРѕСЏРІРёС‚СЃСЏ РїРѕСЃР»Рµ РћС†РµРЅРёС‚СЊ", topCount);
+                    ? string.Format("; Top {0} по score из {1:N0}", Math.Min(topCount, rankedCount), rankedCount)
+                    : string.Format("; Top {0} появится после Оценить", topCount);
             }
 
             return status;
@@ -1531,7 +1531,7 @@ namespace OurIPH
             _buildQueue.Clear();
             SaveBuildQueue();
             UpdateQueueStatus();
-            SetBlueprintListStatus("РћС‡РµСЂРµРґСЊ СЃС‚СЂРѕР№РєРё РѕС‡РёС‰РµРЅР°");
+            SetBlueprintListStatus("Очередь стройки очищена");
         }
 
         private void RemoveQueueItem_Click(object sender, RoutedEventArgs e)
@@ -1545,7 +1545,7 @@ namespace OurIPH
             _buildQueue.Remove(selected);
             SaveBuildQueue();
             UpdateQueueStatus();
-            SetBlueprintListStatus("РЈРґР°Р»РµРЅРѕ РёР· РѕС‡РµСЂРµРґРё: " + selected.ProductName);
+            SetBlueprintListStatus("Удалено из очереди: " + selected.ProductName);
         }
 
         private void CreateProjectFromQueue_Click(object sender, RoutedEventArgs e)
@@ -1557,7 +1557,7 @@ namespace OurIPH
 
             var project = new BuildProject
             {
-                Name = "РџСЂРѕРµРєС‚ " + DateTime.Now.ToString("yyyy-MM-dd HH-mm")
+                Name = "Проект " + DateTime.Now.ToString("yyyy-MM-dd HH-mm")
             };
 
             var projectItemsByProduct = new Dictionary<string, BuildProjectItem>();
@@ -1673,7 +1673,7 @@ namespace OurIPH
                 var blueprint = _database.FindBlueprintByProduct(item.ProductTypeId);
                 if (blueprint == null)
                 {
-                    item.EstimateStatus = "РќРµС‚ С‡РµСЂС‚РµР¶Р°";
+                    item.EstimateStatus = "Нет чертежа";
                     continue;
                 }
 
@@ -1689,7 +1689,7 @@ namespace OurIPH
                     item.Runs, item.MaterialEfficiency, item.TimeEfficiency, decryptor, estimateCache);
                 if (station == null || !station.SupportsProduction)
                 {
-                    _projectItemEstimateDisplayService.ResetUnavailable(item, station?.ValidationMessage ?? "РќРµС‚ СЃС‚Р°РЅС†РёРё");
+                    _projectItemEstimateDisplayService.ResetUnavailable(item, station?.ValidationMessage ?? "Нет станции");
                     continue;
                 }
 
@@ -2066,7 +2066,7 @@ namespace OurIPH
             var material = e.Row == null ? null : e.Row.Item as BuildProjectMaterial;
             var textBox = e.EditingElement as TextBox;
             var project = projectsList.SelectedItem as BuildProject;
-            if (project == null || material == null || textBox == null || e.Column == null || e.Column.Header == null || e.Column.Header.ToString() != "РљСѓРїР»РµРЅРѕ")
+            if (project == null || material == null || textBox == null || e.Column == null || e.Column.Header == null || e.Column.Header.ToString() != "Куплено")
             {
                 return;
             }
@@ -2077,13 +2077,13 @@ namespace OurIPH
             {
                 SetProjectStockOwnedQuantity(project, material.TypeId, totalOwnedThroughLine);
                 SaveAndRefreshProject();
-                projectStatus.Text = string.Format("РћСЃС‚Р°С‚РѕРє РѕР±РЅРѕРІР»РµРЅ РёР· С‚Р°Р±Р»РёС†С‹: {0} = {1:N0}", material.Name, totalOwnedThroughLine);
+                projectStatus.Text = string.Format("Остаток обновлен из таблицы: {0} = {1:N0}", material.Name, totalOwnedThroughLine);
             }));
         }
 
         private void ProjectMaterialsGrid_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
         {
-            if (e.Column == null || e.Column.Header == null || e.Column.Header.ToString() != "РљСѓРїР»РµРЅРѕ")
+            if (e.Column == null || e.Column.Header == null || e.Column.Header.ToString() != "Куплено")
             {
                 e.Cancel = true;
             }
@@ -2118,8 +2118,8 @@ namespace OurIPH
 
             SaveAndRefreshProject();
             projectStatus.Text = imported.Count == 0
-                ? "Р’ Р±СѓС„РµСЂРµ РЅРµ РЅР°Р№РґРµРЅРѕ РјР°С‚РµСЂРёР°Р»РѕРІ С‚РµРєСѓС‰РµРіРѕ РїСЂРѕРµРєС‚Р°"
-                : "РРјРїРѕСЂС‚РёСЂРѕРІР°РЅРѕ РєСѓРїР»РµРЅРЅРѕРµ: " + imported.Count + " РїРѕР·РёС†РёР№";
+                ? "В буфере не найдено материалов текущего проекта"
+                : "Импортировано купленное: " + imported.Count + " позиций";
         }
 
         private void SetProjectMaterialBoughtAll_Click(object sender, RoutedEventArgs e)
@@ -2144,12 +2144,12 @@ namespace OurIPH
 
         private void SetProjectStageBoughtAll_Click(object sender, RoutedEventArgs e)
         {
-            SetSelectedProjectStageOwnedToQuantity(material => material.RequiredThroughWave, "Р­С‚Р°Рї РѕС‚РјРµС‡РµРЅ РєСѓРїР»РµРЅРЅС‹Рј");
+            SetSelectedProjectStageOwnedToQuantity(material => material.RequiredThroughWave, "Этап отмечен купленным");
         }
 
         private void ResetProjectStageBought_Click(object sender, RoutedEventArgs e)
         {
-            SetSelectedProjectStageOwnedToQuantity(material => material.PriorQuantity, "РџРѕРєСѓРїРєРё СЌС‚Р°РїР° СЃР±СЂРѕС€РµРЅС‹");
+            SetSelectedProjectStageOwnedToQuantity(material => material.PriorQuantity, "Покупки этапа сброшены");
         }
 
         private void FilterProjectMaterialsToStage_Click(object sender, RoutedEventArgs e)
@@ -2172,7 +2172,7 @@ namespace OurIPH
                 return material != null && material.Wave == stage.Wave && material.SourceGroupText == stage.Stage;
             };
             RefreshProjectMaterialGroups();
-            projectStatus.Text = "РџРѕРєР°Р·Р°РЅ СЌС‚Р°Рї: " + stage.WaveText + " / " + stage.Stage;
+            projectStatus.Text = "Показан этап: " + stage.WaveText + " / " + stage.Stage;
         }
 
         private void ClearProjectMaterialFilter_Click(object sender, RoutedEventArgs e)
@@ -2185,7 +2185,7 @@ namespace OurIPH
 
             view.Filter = null;
             RefreshProjectMaterialGroups();
-            projectStatus.Text = "РџРѕРєР°Р·Р°РЅС‹ РІСЃРµ РјР°С‚РµСЂРёР°Р»С‹ РїСЂРѕРµРєС‚Р°";
+            projectStatus.Text = "Показаны все материалы проекта";
         }
 
         private void SetSelectedProjectStageOwnedToQuantity(Func<BuildProjectMaterial, long> quantitySelector, string statusText)
@@ -2231,7 +2231,7 @@ namespace OurIPH
 
             stock.OwnedQuantity = Math.Max(0, quantitySelector(material));
             SaveAndRefreshProject();
-            projectStatus.Text = "РћСЃС‚Р°С‚РѕРє РѕР±РЅРѕРІР»РµРЅ: " + material.Name;
+            projectStatus.Text = "Остаток обновлен: " + material.Name;
         }
 
         private void ProjectMaterialsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -2246,7 +2246,7 @@ namespace OurIPH
             {
                 if (projectSelectedMaterialStatus != null)
                 {
-                    projectSelectedMaterialStatus.Text = "Р’С‹Р±РµСЂРёС‚Рµ РјР°С‚РµСЂРёР°Р» РґР»СЏ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ РѕСЃС‚Р°С‚РєР°";
+                    projectSelectedMaterialStatus.Text = "Выберите материал для редактирования остатка";
                 }
 
                 if (projectOwnedMaterialBox != null)
@@ -2265,7 +2265,7 @@ namespace OurIPH
             if (projectSelectedMaterialStatus != null)
             {
                 projectSelectedMaterialStatus.Text = string.Format(
-                    "{0}: РЅСѓР¶РЅРѕ {1:N0}, РєСѓРїР»РµРЅРѕ {2:N0}, РѕСЃС‚Р°Р»РѕСЃСЊ {3:N0}, Рє РІРѕР»РЅРµ {4:N0}",
+                    "{0}: нужно {1:N0}, куплено {2:N0}, осталось {3:N0}, к волне {4:N0}",
                     material.Name,
                     material.Quantity,
                     material.OwnedQuantity,
@@ -2285,7 +2285,7 @@ namespace OurIPH
 
             SetProjectBuildBuyMode(project, material.TypeId, "Buy");
             SaveAndRefreshProject();
-            projectStatus.Text = "РњР°С‚РµСЂРёР°Р» РїСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕ РѕСЃС‚Р°РІР»РµРЅ РІ Р·Р°РєСѓРїРєРµ: " + material.Name;
+            projectStatus.Text = "Материал принудительно оставлен в закупке: " + material.Name;
         }
 
         private void AutoSelectedProjectMaterial_Click(object sender, RoutedEventArgs e)
@@ -2299,7 +2299,7 @@ namespace OurIPH
 
             SetProjectBuildBuyMode(project, material.TypeId, "");
             SaveAndRefreshProject();
-            projectStatus.Text = "РњР°С‚РµСЂРёР°Р» РІРѕР·РІСЂР°С‰РµРЅ РІ Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРёР№ Build/Buy: " + material.Name;
+            projectStatus.Text = "Материал возвращен в автоматический Build/Buy: " + material.Name;
         }
 
         private void ForceBuyProjectItem_Click(object sender, RoutedEventArgs e)
@@ -2314,7 +2314,7 @@ namespace OurIPH
             SetProjectBuildBuyMode(project, item.ProductTypeId, "Buy");
             project.Items.Remove(item);
             SaveAndRefreshProject();
-            projectStatus.Text = "РџСѓРЅРєС‚ СѓРґР°Р»РµРЅ РёР· СЃС‚СЂРѕР№РєРё Рё Р±СѓРґРµС‚ РїРѕРєСѓРїР°С‚СЊСЃСЏ: " + item.ProductName;
+            projectStatus.Text = "Пункт удален из стройки и будет покупаться: " + item.ProductName;
         }
 
         private void CopyProjectMaterials_Click(object sender, RoutedEventArgs e)
@@ -2341,7 +2341,7 @@ namespace OurIPH
                         item.SourceDisplayText,
                         item.TargetLocationText)));
             Clipboard.SetText(string.Join(Environment.NewLine, lines));
-            projectStatus.Text = "РЎРїРёСЃРѕРє Р·Р°РєСѓРїРєРё СЃРєРѕРїРёСЂРѕРІР°РЅ";
+            projectStatus.Text = "Список закупки скопирован";
         }
 
         private void CopyProjectEveBuy_Click(object sender, RoutedEventArgs e)
@@ -2353,7 +2353,7 @@ namespace OurIPH
             }
 
             Clipboard.SetText(text);
-            projectStatus.Text = "EVE Р·Р°РєСѓРїРєР° РІСЃРµРіРѕ РїСЂРѕРµРєС‚Р° СЃРєРѕРїРёСЂРѕРІР°РЅР°: " + CountEveMultiBuyLines(_projectMaterials) + " СЃС‚СЂРѕРє";
+            projectStatus.Text = "EVE закупка всего проекта скопирована: " + CountEveMultiBuyLines(_projectMaterials) + " строк";
         }
 
         private void CopyProjectEveBuyWithHauling_Click(object sender, RoutedEventArgs e)
@@ -2367,7 +2367,7 @@ namespace OurIPH
             var lines = new List<string>();
             foreach (var destinationGroup in _projectMaterials
                          .Where(item => item.Quantity > 0)
-                         .GroupBy(item => string.IsNullOrWhiteSpace(item.TargetLocationText) ? "Р‘РµР· СЃС‚Р°РЅС†РёРё" : item.TargetLocationText)
+                         .GroupBy(item => string.IsNullOrWhiteSpace(item.TargetLocationText) ? "Без станции" : item.TargetLocationText)
                          .OrderBy(group => group.Key))
             {
                 lines.Add(destinationGroup.Key);
@@ -2389,9 +2389,9 @@ namespace OurIPH
 
             Clipboard.SetText("EVE Multi-Buy" + Environment.NewLine
                 + buyText + Environment.NewLine + Environment.NewLine
-                + "РџР»Р°РЅ СЂР°Р·РІРѕР·Р°" + Environment.NewLine
+                + "План развоза" + Environment.NewLine
                 + string.Join(Environment.NewLine, lines).TrimEnd());
-            projectStatus.Text = "EVE Р·Р°РєСѓРїРєР° Рё РїР»Р°РЅ СЂР°Р·РІРѕР·Р° СЃРєРѕРїРёСЂРѕРІР°РЅС‹";
+            projectStatus.Text = "EVE закупка и план развоза скопированы";
         }
 
         private void CopyProjectHaulingPlan_Click(object sender, RoutedEventArgs e)
@@ -2404,7 +2404,7 @@ namespace OurIPH
             var lines = new List<string>();
             foreach (var destinationGroup in _projectMaterials
                          .Where(item => item.Quantity > 0)
-                         .GroupBy(item => string.IsNullOrWhiteSpace(item.TargetLocationText) ? "Р‘РµР· СЃС‚Р°РЅС†РёРё" : item.TargetLocationText)
+                         .GroupBy(item => string.IsNullOrWhiteSpace(item.TargetLocationText) ? "Без станции" : item.TargetLocationText)
                          .OrderBy(group => group.Key))
             {
                 lines.Add(destinationGroup.Key);
@@ -2425,7 +2425,7 @@ namespace OurIPH
             }
 
             Clipboard.SetText(string.Join(Environment.NewLine, lines).TrimEnd());
-            projectStatus.Text = "РџР»Р°РЅ СЂР°Р·РІРѕР·Р° СЃРєРѕРїРёСЂРѕРІР°РЅ";
+            projectStatus.Text = "План развоза скопирован";
         }
 
         private void CopyProjectStageEveBuy_Click(object sender, RoutedEventArgs e)
@@ -2444,7 +2444,7 @@ namespace OurIPH
             }
 
             Clipboard.SetText(text);
-            projectStatus.Text = "EVE Р·Р°РєСѓРїРєР° С‚РѕР»СЊРєРѕ СЌС‚Р°РїР° СЃРєРѕРїРёСЂРѕРІР°РЅР°: " + stage.WaveText + " / " + stage.Stage;
+            projectStatus.Text = "EVE закупка только этапа скопирована: " + stage.WaveText + " / " + stage.Stage;
         }
 
         private void CopyProjectWaveJobs_Click(object sender, RoutedEventArgs e)
@@ -2464,7 +2464,7 @@ namespace OurIPH
                 .ToList();
             if (jobs.Count == 0)
             {
-                projectStatus.Text = "Р’ РІС‹Р±СЂР°РЅРЅРѕР№ РІРѕР»РЅРµ РЅРµС‚ РЅРµР·Р°РІРµСЂС€РµРЅРЅС‹С… jobs";
+                projectStatus.Text = "В выбранной волне нет незавершенных jobs";
                 return;
             }
 
@@ -2489,7 +2489,7 @@ namespace OurIPH
                 item.ProductionTimeText)));
 
             Clipboard.SetText(string.Join(Environment.NewLine, lines));
-            projectStatus.Text = string.Format("РџР»Р°РЅ jobs РІРѕР»РЅС‹ {0} СЃРєРѕРїРёСЂРѕРІР°РЅ: {1} СЃС‚СЂРѕРє", wave, jobs.Count);
+            projectStatus.Text = string.Format("План jobs волны {0} скопирован: {1} строк", wave, jobs.Count);
         }
 
         private void CompleteProjectWave_Click(object sender, RoutedEventArgs e)
@@ -2507,7 +2507,7 @@ namespace OurIPH
             }
 
             SaveAndRefreshProject();
-            projectStatus.Text = "Р’РѕР»РЅР° " + wave + " РѕС‚РјРµС‡РµРЅР° РіРѕС‚РѕРІРѕР№";
+            projectStatus.Text = "Волна " + wave + " отмечена готовой";
         }
 
         private int GetSelectedProjectWave(BuildProject project)
@@ -2596,7 +2596,7 @@ namespace OurIPH
                     item.InventionPlanText,
                     item.ScienceStationText)));
             Clipboard.SetText(string.Join(Environment.NewLine, lines));
-            projectStatus.Text = "РџР»Р°РЅ РїСЂРѕРµРєС‚Р° СЃРєРѕРїРёСЂРѕРІР°РЅ";
+            projectStatus.Text = "План проекта скопирован";
         }
 
         private void BuildSelectedProjectMaterial_Click(object sender, RoutedEventArgs e)
@@ -2612,7 +2612,7 @@ namespace OurIPH
             var blueprint = _database.FindBlueprintByProduct(material.TypeId);
             if (blueprint == null)
             {
-                projectStatus.Text = "Р”Р»СЏ РІС‹Р±СЂР°РЅРЅРѕРіРѕ РјР°С‚РµСЂРёР°Р»Р° РЅРµС‚ С‡РµСЂС‚РµР¶Р°";
+                projectStatus.Text = "Для выбранного материала нет чертежа";
                 return;
             }
 
@@ -2639,7 +2639,7 @@ namespace OurIPH
             SaveAndRefreshProject();
             projectItemsGrid.Items.Refresh();
             projectsList.Items.Refresh();
-            projectStatus.Text = "РњР°С‚РµСЂРёР°Р» РґРѕР±Р°РІР»РµРЅ РІ СЃС‚СЂРѕР№РєСѓ: " + blueprint.ProductName;
+            projectStatus.Text = "Материал добавлен в стройку: " + blueprint.ProductName;
         }
 
         private void DeleteProjectItem_Click(object sender, RoutedEventArgs e)
@@ -2670,7 +2670,7 @@ namespace OurIPH
             projectMaterialsGrid.Items.Refresh();
             _projectStore.Save(_projects);
             var after = project.Items.Sum(item => item.MaterialCost + item.InventionCost + item.InstallationCost);
-            projectStatus.Text = string.Format("{0} | РџРµСЂРµСЃС‡РµС‚: {1:N0} -> {2:N0} ISK", project.SummaryText, before, after);
+            projectStatus.Text = string.Format("{0} | Пересчет: {1:N0} -> {2:N0} ISK", project.SummaryText, before, after);
         }
 
         private void DeleteProject_Click(object sender, RoutedEventArgs e)
@@ -2775,7 +2775,7 @@ namespace OurIPH
 
             RefreshProjectStageSummaries();
             RefreshProjectMaterialGroups();
-            projectStatus.Text = string.Format("{0} | Р—Р°РєСѓРїРєР°: {1:N0} ISK", project.SummaryText, totals.Values.Sum(item => item.TotalCost));
+            projectStatus.Text = string.Format("{0} | Закупка: {1:N0} ISK", project.SummaryText, totals.Values.Sum(item => item.TotalCost));
         }
 
         private void RefreshProjectStageSummaries()
@@ -3003,7 +3003,7 @@ namespace OurIPH
 
                 oreLine.Quantity += oreQuantity;
                 oreLine.ProducesQuantity += producedMinerals;
-                oreLine.UsedBy = AddUsedBy(oreLine.UsedBy, mineral.Name + " РґР»СЏ " + mineral.UsedBy);
+                oreLine.UsedBy = AddUsedBy(oreLine.UsedBy, mineral.Name + " для " + mineral.UsedBy);
             }
         }
 
@@ -3075,7 +3075,7 @@ namespace OurIPH
                     RemoveProjectMaterialLine(totals, mineral);
                 }
 
-                var usedBy = "Reprocessing РґР»СЏ " + string.Join(", ", waveGroup.Select(line => line.Name).Distinct());
+                var usedBy = "Reprocessing для " + string.Join(", ", waveGroup.Select(line => line.Name).Distinct());
                 var sourceDetails = BuildReprocessingDetails(waveGroup, plan);
                 foreach (var plannedOre in plan)
                 {
@@ -3144,7 +3144,7 @@ namespace OurIPH
                     : string.Format(CultureInfo.CurrentCulture, "{0} {1:N0}", required.Value.Name, produced));
             }
 
-            return "РџРµСЂРµСЂР°Р±РѕС‚РєР°: " + string.Join(", ", parts);
+            return "Переработка: " + string.Join(", ", parts);
         }
 
         private double GetOreUnitPrice(Dictionary<long, MarketPrice> orePrices, long oreTypeId)
@@ -3591,7 +3591,7 @@ namespace OurIPH
             var facility = blueprintFacilityBox.SelectedItem as FacilityPreset;
             if (facility == null)
             {
-                MessageBox.Show("РЎРЅР°С‡Р°Р»Р° РґРѕР±Р°РІСЊС‚Рµ РёР»Рё РІС‹Р±РµСЂРёС‚Рµ РїСЂРµСЃРµС‚ СЃС‚Р°РЅС†РёР№ РЅР° РІРєР»Р°РґРєРµ РЎС‚Р°РЅС†РёРё.", "Our IPH", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Сначала добавьте или выберите пресет станций на вкладке Станции.", "Our IPH", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
             try
@@ -3602,7 +3602,7 @@ namespace OurIPH
             }
             catch (Exception ex)
             {
-                MessageBox.Show("РќРµ СѓРґР°Р»РѕСЃСЊ РѕС†РµРЅРёС‚СЊ С‡РµСЂС‚РµР¶Рё: " + ex.Message, "Our IPH", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Не удалось оценить чертежи: " + ex.Message, "Our IPH", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -3648,7 +3648,7 @@ namespace OurIPH
                 if (materials.Count == 0)
                 {
                     _blueprintEstimateApplicationService.Apply(blueprint, new BlueprintEstimate(), 0, 0, ContractPriceResult.Empty(""), 0, 0,
-                        "РќРµС‚ РјР°С‚РµСЂРёР°Р»РѕРІ", bestStation);
+                        "Нет материалов", bestStation);
                     continue;
                 }
 
@@ -4924,7 +4924,7 @@ namespace OurIPH
             var typeIds = GetRelevantPriceTypeIds();
             if (region == null || typeIds.Count == 0)
             {
-                priceStatus.Text = "Р”РѕР±Р°РІСЊС‚Рµ РїСЂРµРґРјРµС‚С‹ РІ РѕС‡РµСЂРµРґСЊ, РїРѕС‚РѕРј РѕР±РЅРѕРІРёС‚Рµ С†РµРЅС‹.";
+                priceStatus.Text = "Добавьте предметы в очередь, потом обновите цены.";
                 return;
             }
 
@@ -5074,27 +5074,27 @@ namespace OurIPH
 
             if (sender == navBlueprints)
             {
-                ShowPage(blueprintsPage, "Р§РµСЂС‚РµР¶Рё", "РїРѕРёСЃРє, СЂР°СЃС‡РµС‚ Рё РґРѕР±Р°РІР»РµРЅРёРµ РІ РѕС‡РµСЂРµРґСЊ");
+                ShowPage(blueprintsPage, "Чертежи", "поиск, расчет и добавление в очередь");
             }
             else if (sender == navAnalysis)
             {
-                ShowPage(analysisPage, "РђРЅР°Р»РёР·", "SVR, РєРѕРЅС‚СЂР°РєС‚С‹, score Рё СЂР°СЃС€РёСЂРµРЅРЅС‹Рµ С„РёР»СЊС‚СЂС‹");
+                ShowPage(analysisPage, "Анализ", "SVR, контракты, score и расширенные фильтры");
             }
             else if (sender == navPrices)
             {
-                ShowPage(pricesPage, "Р¦РµРЅС‹", "Fuzzwork-Р°РіСЂРµРіР°С‚С‹ РїРѕ СЂРµРіРёРѕРЅСѓ РёР»Рё С…Р°Р±Сѓ");
+                ShowPage(pricesPage, "Цены", "Fuzzwork-агрегаты по региону или хабу");
             }
             else if (sender == navFacilities)
             {
-                ShowPage(facilitiesPage, "РЎС‚Р°РЅС†РёРё", "РїСЂРѕС„РёР»Рё СЃС‚СЂСѓРєС‚СѓСЂ, СЂРёРіРѕРІ, СЃРёСЃС‚РµРј Рё РЅР°Р»РѕРіРѕРІ");
+                ShowPage(facilitiesPage, "Станции", "профили структур, ригов, систем и налогов");
             }
             else if (sender == navBuildQueue)
             {
-                ShowPage(buildQueuePage, "РћС‡РµСЂРµРґСЊ СЃС‚СЂРѕР№РєРё", "РїР»Р°РЅРёСЂСѓРµРјС‹Рµ С‡РµСЂС‚РµР¶Рё РїРµСЂРµРґ Р·Р°РєСѓРїРєРѕР№ Рё РїСЂРѕРµРєС‚Р°РјРё");
+                ShowPage(buildQueuePage, "Очередь стройки", "планируемые чертежи перед закупкой и проектами");
             }
             else if (sender == navProjects)
             {
-                ShowPage(projectsPage, "РўРµРєСѓС‰РёРµ РїСЂРѕРµРєС‚С‹", "РІРѕР»РЅС‹ РїСЂРѕРёР·РІРѕРґСЃС‚РІР°, РѕСЃС‚Р°С‚РєРё Рё Р·Р°РєСѓРїРєР°");
+                ShowPage(projectsPage, "Текущие проекты", "волны производства, остатки и закупка");
             }
         }
 

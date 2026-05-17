@@ -20,6 +20,12 @@ After every meaningful implementation stage, update `IMPLEMENTATION_NOTES.md` an
 - Port legacy VB.NET logic from `EVE-IPH-master` carefully and verify behavior against local data where possible.
 - Do not revert unrelated user changes.
 
+## Active Scope Rule
+- Choose exactly one lane per pass: GUI bugfix/workflow stabilization, parity fixture, refactor/extraction, or docs cleanup.
+- Do not mix lanes in the same pass unless a tiny documentation update is needed to record the completed work.
+- If GUI/manual verification is required but interactive WPF access is unavailable, do not substitute unrelated refactor or parity work. Document the blocker and provide exact manual verification steps instead.
+- Treat full `ConvertToOre.vb` LP numeric parity and full `CalculateBlueprintEstimate` extraction as separate explicit lanes, not default follow-up work.
+
 ## Build And Verification
 Use Visual Studio MSBuild directly when needed:
 

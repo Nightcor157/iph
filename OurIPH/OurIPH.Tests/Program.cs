@@ -1569,12 +1569,12 @@ namespace OurIPH.Tests
 
             AssertEqual("OK", service.GetBlueprintStatus(new BlueprintEstimate(), 0), "blueprint estimate status is OK without missing prices or invention");
             AssertEqual("OK + invention", service.GetBlueprintStatus(new BlueprintEstimate { InventionCost = 10 }, 0), "blueprint estimate status shows invention cost");
-            AssertEqual("РќРµС‚ С†РµРЅ: 3", service.GetBlueprintStatus(new BlueprintEstimate { InventionCost = 10 }, 3), "blueprint estimate status prioritizes missing prices over invention");
-            AssertEqual("РќРµС‚ РґР°РЅРЅС‹С… invention", service.GetBlueprintStatus(new BlueprintEstimate { InventionMissing = true }, 3), "blueprint estimate status prioritizes missing invention data");
+            AssertEqual("Нет цен: 3", service.GetBlueprintStatus(new BlueprintEstimate { InventionCost = 10 }, 3), "blueprint estimate status prioritizes missing prices over invention");
+            AssertEqual("Нет данных invention", service.GetBlueprintStatus(new BlueprintEstimate { InventionMissing = true }, 3), "blueprint estimate status prioritizes missing invention data");
 
-            AssertEqual("РќРµС‚ РєРµС€Р° С†РµРЅ", service.GetProjectItemStatus(new BlueprintEstimate(), false), "project estimate status reports missing price cache");
+            AssertEqual("Нет кеша цен", service.GetProjectItemStatus(new BlueprintEstimate(), false), "project estimate status reports missing price cache");
             AssertEqual("OK + invention", service.GetProjectItemStatus(new BlueprintEstimate { InventionCost = 25 }, true), "project estimate status shows invention cost when cache exists");
-            AssertEqual("РќРµС‚ РґР°РЅРЅС‹С… invention", service.GetProjectItemStatus(new BlueprintEstimate { InventionMissing = true }, false), "project estimate status prioritizes missing invention data");
+            AssertEqual("Нет данных invention", service.GetProjectItemStatus(new BlueprintEstimate { InventionMissing = true }, false), "project estimate status prioritizes missing invention data");
         }
 
         private static void BlueprintInventionMath_CalculatesChanceRunsAndJobs()
