@@ -1,0 +1,54 @@
+# Build output
+**/bin/
+**/obj/
+**/Debug/
+**/Release/
+**/.vs/
+
+# User/local IDE state
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Runtime logs and temporary files
+*.log
+*.tmp
+*.cache
+*.bak
+*.orig
+Thumbs.db
+Desktop.ini
+
+# Generated debug symbols and executables
+*.pdb
+*.ilk
+*.iobj
+*.ipdb
+*.exe
+*.msi
+*.zip
+
+# Nested repository metadata from imported legacy/source folders
+**/.git/
+**/.gitignore~
+
+# NuGet package restore output from legacy projects
+**/packages/
+
+# Old deployment/runtime payloads that are not source-controlled project input
+LatestFiles/*
+!LatestFiles/EVEIPH DB.sqlite
+!LatestFiles/LatestVersionIPH.xml
+!LatestFiles/Patch Notes.txt
+!LatestFiles/FirstProgramLoad
+
+EVE-SDE-Database-Builder/Root Directory/
+EVE-IPH-master/Root Directory/
+
+# Local screenshots/debug captures
+OurIPH-ui-*.png
+
+# Duplicate legacy fallback database. The repo keeps LatestFiles/EVEIPH DB.sqlite.
+Root Directory/EVEIPH DB.sqlite

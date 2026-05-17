@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BlueprintFilterRules>
+  <LimitedMetaGroupIds>
+    <Id Value="3" />
+    <Id Value="4" />
+    <Id Value="5" />
+    <Id Value="15" />
+    <Id Value="19" />
+    <Id Value="52" />
+    <Id Value="53" />
+    <Id Value="54" />
+  </LimitedMetaGroupIds>
+  <LimitedMarketGroupKeywords>
+    <Keyword Value="Pirate Faction" />
+    <Keyword Value="Navy Faction" />
+    <Keyword Value="Storyline" />
+    <Keyword Value="Officer" />
+    <Keyword Value="Deadspace" />
+  </LimitedMarketGroupKeywords>
+  <LimitedGroupKeywords>
+    <Keyword Value="Special Edition" />
+    <Keyword Value="Tournament" />
+  </LimitedGroupKeywords>
+  <RareProductKeywords>
+    <Keyword Value="Officer" />
+    <Keyword Value="'s Modified" />
+    <Keyword Value="'s Power Diagnostic" />
+    <Keyword Value="Tournament" />
+    <Keyword Value="Alliance Tournament" />
+  </RareProductKeywords>
+  <RareBlueprintKeywords>
+    <Keyword Value="Officer" />
+    <Keyword Value="'s Modified" />
+    <Keyword Value="Tournament" />
+    <Keyword Value="Alliance Tournament" />
+  </RareBlueprintKeywords>
+  <RareGroupKeywords>
+    <Keyword Value="Officer" />
+    <Keyword Value="Special Edition" />
+    <Keyword Value="Tournament" />
+    <Keyword Value="Prototype" />
+  </RareGroupKeywords>
+  <RareMarketGroupKeywords>
+    <Keyword Value="Officer" />
+    <Keyword Value="Deadspace" />
+    <Keyword Value="Special Edition" />
+    <Keyword Value="Tournament" />
+  </RareMarketGroupKeywords>
+  <CapitalKeywords>
+    <Keyword Value="Capital" />
+    <Keyword Value="Freighter" />
+    <Keyword Value="Dreadnought" />
+    <Keyword Value="Carrier" />
+    <Keyword Value="Force Auxiliary" />
+    <Keyword Value="Supercarrier" />
+    <Keyword Value="Titan" />
+  </CapitalKeywords>
+  <ReactionGroupKeywords>
+    <Keyword Value="Moon" />
+    <Keyword Value="Composite" />
+    <Keyword Value="Hybrid Polymer" />
+    <Keyword Value="Biochemical" />
+  </ReactionGroupKeywords>
+  <ReactionMarketGroupKeywords>
+    <Keyword Value="Moon Materials" />
+    <Keyword Value="Hybrid Polymers" />
+    <Keyword Value="Booster Materials" />
+  </ReactionMarketGroupKeywords>
+</BlueprintFilterRules>

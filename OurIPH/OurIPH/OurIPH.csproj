@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5872F9F8-9C6D-47A4-B31D-82E2CC2B3FC0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>OurIPH</RootNamespace>
+    <AssemblyName>OurIPH</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60DC8134-EBA5-43B8-BCC9-BB4BC16C2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Any CPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Any CPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\Root Directory\Newtonsoft.Json.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\..\Root Directory\System.Data.SQLite.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BlueprintEstimate.cs" />
+    <Compile Include="Models\BlueprintEstimateAssemblyContext.cs" />
+    <Compile Include="Models\BlueprintEstimateContext.cs" />
+    <Compile Include="Models\BlueprintEstimateDependencies.cs" />
+    <Compile Include="Models\BlueprintEstimateRecursionState.cs" />
+    <Compile Include="Models\BlueprintEstimateResult.cs" />
+    <Compile Include="Models\BlueprintEstimateMaterialOrchestrationResult.cs" />
+    <Compile Include="Models\BlueprintMaterialTraversalResult.cs" />
+    <Compile Include="Models\BlueprintDecryptorEstimateCandidate.cs" />
+    <Compile Include="Models\BlueprintSearchResult.cs" />
+    <Compile Include="Models\BlueprintStationEstimateCandidate.cs" />
+    <Compile Include="Models\BlueprintFilterRules.cs" />
+    <Compile Include="Models\BuildQueueItem.cs" />
+    <Compile Include="Models\BuildProject.cs" />
+    <Compile Include="Models\BlueprintBuildProfileOptions.cs" />
+    <Compile Include="Models\ChildBlueprintEstimateRequest.cs" />
+    <Compile Include="Models\ContractPriceSample.cs" />
+    <Compile Include="Models\ContractPriceSampleReview.cs" />
+    <Compile Include="Models\DecryptorOption.cs" />
+    <Compile Include="Models\FacilityCatalogModels.cs" />
+    <Compile Include="Models\FacilityPreset.cs" />
+    <Compile Include="Models\InventionInfo.cs" />
+    <Compile Include="Models\InventionCostContext.cs" />
+    <Compile Include="Models\InventionCostResult.cs" />
+    <Compile Include="Models\InventionPlan.cs" />
+    <Compile Include="Models\InventionTimeContext.cs" />
+    <Compile Include="Models\InventionTimeResult.cs" />
+    <Compile Include="Models\InventionUsageCostContext.cs" />
+    <Compile Include="Models\InventionUsageCostResult.cs" />
+    <Compile Include="Models\BlueprintListFilterOptions.cs" />
+    <Compile Include="Models\BlueprintTypeFilterOptions.cs" />
+    <Compile Include="Models\MarketPrice.cs" />
+    <Compile Include="Models\MarketPriceLoadProgress.cs" />
+    <Compile Include="Models\MarketHistoryStats.cs" />
+    <Compile Include="Models\MarketOrderStats.cs" />
+    <Compile Include="Models\MarketRegion.cs" />
+    <Compile Include="Models\MaterialBuildBuyDecisionContext.cs" />
+    <Compile Include="Models\MaterialBuildBuyDecisionResult.cs" />
+    <Compile Include="Models\MaterialEstimateLine.cs" />
+    <Compile Include="Models\MaterialRequirement.cs" />
+    <Compile Include="Models\NumericInputRule.cs" />
+    <Compile Include="Models\ReprocessingOption.cs" />
+    <Compile Include="Models\SkillRequirement.cs" />
+    <Compile Include="Models\UiSettings.cs" />
+    <Compile Include="Services\AppPaths.cs" />
+    <Compile Include="Services\AppLogger.cs" />
+    <Compile Include="Services\BlueprintBuildProfileService.cs" />
+    <Compile Include="Services\BlueprintCopyStatusService.cs" />
+    <Compile Include="Services\BlueprintEfficiencyService.cs" />
+    <Compile Include="Services\BlueprintEstimateApplicationService.cs" />
+    <Compile Include="Services\BlueprintEstimateCacheService.cs" />
+    <Compile Include="Services\BlueprintEstimateSelectionService.cs" />
+    <Compile Include="Services\BlueprintEstimateStatusService.cs" />
+    <Compile Include="Services\BlueprintEstimateTraversalService.cs" />
+    <Compile Include="Services\BlueprintEstimateMaterialTraversalService.cs" />
+    <Compile Include="Services\BlueprintEstimateMaterialOrchestrationService.cs" />
+    <Compile Include="Services\BlueprintEstimateResultAssembler.cs" />
+    <Compile Include="Services\BlueprintInventionCostService.cs" />
+    <Compile Include="Services\BlueprintInventionMathService.cs" />
+    <Compile Include="Services\BlueprintInventionTimeService.cs" />
+    <Compile Include="Services\BlueprintListFilterService.cs" />
+    <Compile Include="Services\BlueprintManufacturingMathService.cs" />
+    <Compile Include="Services\BlueprintMaterialEstimateLineService.cs" />
+    <Compile Include="Services\BlueprintMaterialMathService.cs" />
+    <Compile Include="Services\BlueprintProfitabilityService.cs" />
+    <Compile Include="Services\BlueprintProductionTypeService.cs" />
+    <Compile Include="Services\BlueprintRankingService.cs" />
+    <Compile Include="Services\BlueprintSkillRequirementService.cs" />
+    <Compile Include="Services\BlueprintTypeFilterService.cs" />
+    <Compile Include="Services\BuildProjectDecisionService.cs" />
+    <Compile Include="Services\BuildQueueService.cs" />
+    <Compile Include="Services\BuildQueueStore.cs" />
+    <Compile Include="Services\BuildProjectStore.cs" />
+    <Compile Include="Services\CharacterSkillStore.cs" />
+    <Compile Include="Services\BlueprintFilterRuleStore.cs" />
+    <Compile Include="Services\BlueprintFilteringService.cs" />
+    <Compile Include="Services\ContractPricingService.cs" />
+    <Compile Include="Services\ContractPriceStore.cs" />
+    <Compile Include="Services\EveDatabaseService.cs" />
+    <Compile Include="Services\EsiMarketHistoryService.cs" />
+    <Compile Include="Services\EsiMarketOrderService.cs" />
+    <Compile Include="Services\EsiPublicContractService.cs" />
+    <Compile Include="Services\ExcludedBlueprintStore.cs" />
+    <Compile Include="Services\FacilityActivityStationService.cs" />
+    <Compile Include="Services\FacilityCatalogService.cs" />
+    <Compile Include="Services\FacilityPresetStore.cs" />
+    <Compile Include="Services\FuzzworkMarketService.cs" />
+    <Compile Include="Services\MarketPriceCacheStore.cs" />
+    <Compile Include="Services\MarketPriceCacheService.cs" />
+    <Compile Include="Services\MarketHistoryCacheStore.cs" />
+    <Compile Include="Services\MarketHistoryCacheService.cs" />
+    <Compile Include="Services\MarketPriceSelectionService.cs" />
+    <Compile Include="Services\MaterialBuildBuyDecisionService.cs" />
+    <Compile Include="Services\NumericInputValidationService.cs" />
+    <Compile Include="Services\OrePlanningService.cs" />
+    <Compile Include="Services\PriceUpdateStatusService.cs" />
+    <Compile Include="Services\ProjectStockService.cs" />
+    <Compile Include="Services\ProjectMaterialImportService.cs" />
+    <Compile Include="Services\ProjectItemEstimateApplicationService.cs" />
+    <Compile Include="Services\ProjectItemEstimateDisplayService.cs" />
+    <Compile Include="Services\ProjectQueueDisplayService.cs" />
+    <Compile Include="Services\SalesFeeService.cs" />
+    <Compile Include="Services\SalesVolumeRatioService.cs" />
+    <Compile Include="Services\TimeoutWebClient.cs" />
+    <Compile Include="Services\UiSettingsStore.cs" />
+    <Compile Include="Services\UsedByListService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\Root Directory\x86\SQLite.Interop.dll">
+      <Link>x86\SQLite.Interop.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Root Directory\x64\SQLite.Interop.dll">
+      <Link>x64\SQLite.Interop.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

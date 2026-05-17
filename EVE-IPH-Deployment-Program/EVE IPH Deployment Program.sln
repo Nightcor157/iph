@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "EVE IPH Deployment Program", "EVE IPH Deployment Program.vbproj", "{4240E157-C44F-4894-A46E-62B85DC7F3B6}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "EVEIPHSetupWizard", "..\EVEIPHSetupWizard\EVEIPHSetupWizard.vdproj", "{BD5FDC42-5FC5-4DA7-8D2C-BF8622374E51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4240E157-C44F-4894-A46E-62B85DC7F3B6}.Debug|x86.ActiveCfg = Debug|x86
+		{4240E157-C44F-4894-A46E-62B85DC7F3B6}.Debug|x86.Build.0 = Debug|x86
+		{4240E157-C44F-4894-A46E-62B85DC7F3B6}.Release|x86.ActiveCfg = Release|x86
+		{4240E157-C44F-4894-A46E-62B85DC7F3B6}.Release|x86.Build.0 = Release|x86
+		{BD5FDC42-5FC5-4DA7-8D2C-BF8622374E51}.Debug|x86.ActiveCfg = Debug
+		{BD5FDC42-5FC5-4DA7-8D2C-BF8622374E51}.Release|x86.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationSettings>
+  <CheckforUpdatesonStart>False</CheckforUpdatesonStart>
+  <DataExportFormat>Default</DataExportFormat>
+  <AllowSkillOverride>False</AllowSkillOverride>
+  <ShowToolTips>True</ShowToolTips>
+  <RefiningImplantValue>0</RefiningImplantValue>
+  <ManufacturingImplantValue>0</ManufacturingImplantValue>
+  <CopyImplantValue>0</CopyImplantValue>
+  <BrokerCorpStanding>5</BrokerCorpStanding>
+  <BrokerFactionStanding>5</BrokerFactionStanding>
+  <DefaultBPME>0</DefaultBPME>
+  <DefaultBPTE>0</DefaultBPTE>
+  <CheckBuildBuy>False</CheckBuildBuy>
+  <IncludeInGameLinksinCopyText>False</IncludeInGameLinksinCopyText>
+  <ShopListIncludeInventMats>True</ShopListIncludeInventMats>
+  <ShopListIncludeCopyMats>True</ShopListIncludeCopyMats>
+  <SuggestBuildBPNotOwned>True</SuggestBuildBPNotOwned>
+  <UpdatePricesRefreshInterval>10</UpdatePricesRefreshInterval>
+  <LoadAssetsonStartup>True</LoadAssetsonStartup>
+  <DisableSound>False</DisableSound>
+  <LoadbpsonStartup>True</LoadbpsonStartup>
+  <LoadESISystemCostIndiciesDataonStartup>True</LoadESISystemCostIndiciesDataonStartup>
+  <LoadESIMarketDataonStartup>True</LoadESIMarketDataonStartup>
+  <SaveBPRelicsDecryptors>False</SaveBPRelicsDecryptors>
+  <IgnoreSVRThresholdValue>0</IgnoreSVRThresholdValue>
+  <SVRAveragePriceRegion>The Forge</SVRAveragePriceRegion>
+  <SVRAveragePriceDuration>7</SVRAveragePriceDuration>
+  <AutoUpdateSVRonBPTab>True</AutoUpdateSVRonBPTab>
+  <ProxyAddress />
+  <ProxyPort>0</ProxyPort>
+  <SaveFacilitiesbyChar>True</SaveFacilitiesbyChar>
+  <LoadBPsbyChar>True</LoadBPsbyChar>
+  <LoadESIPublicStructuresonStartup>True</LoadESIPublicStructuresonStartup>
+  <DisableGATracking>False</DisableGATracking>
+  <AlphaAccount>False</AlphaAccount>
+  <UseActiveSkillLevels>False</UseActiveSkillLevels>
+  <SupressESIStatusMessages>False</SupressESIStatusMessages>
+  <LoadMaxAlphaSkills>False</LoadMaxAlphaSkills>
+  <ShareSavedFacilities>True</ShareSavedFacilities>
+  <RefineDrillDown>False</RefineDrillDown>
+  <AlwaysBuyFuelBlocks>False</AlwaysBuyFuelBlocks>
+  <AlwaysBuyRAMs>False</AlwaysBuyRAMs>
+  <BaseSalesTaxRate>4.5</BaseSalesTaxRate>
+  <BaseBrokerFeeRate>3</BaseBrokerFeeRate>
+  <SCCBrokerFeeSurcharge>0.005</SCCBrokerFeeSurcharge>
+  <SCCIndustryFeeSurcharge>0.04</SCCIndustryFeeSurcharge>
+  <AlphaAccountTaxRate>0.0025</AlphaAccountTaxRate>
+  <StationTaxRate>0.0025</StationTaxRate>
+  <StructureTaxRate>0</StructureTaxRate>
+  <BuildWhenNotEnoughItemsonMarket>False</BuildWhenNotEnoughItemsonMarket>
+  <ManualPriceOverride>False</ManualPriceOverride>
+  <SaveBPCCostperBP>True</SaveBPCCostperBP>
+  <MarketHistoryRegion>The Forge</MarketHistoryRegion>
+</ApplicationSettings>

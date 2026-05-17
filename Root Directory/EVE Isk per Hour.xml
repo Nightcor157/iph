@@ -1,0 +1,213 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+EVE Isk per Hour
+</name>
+</assembly>
+<members>
+<member name="T:EVE_Isk_per_Hour.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:EVE_Isk_per_Hour.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:EVE_Isk_per_Hour.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="P:EVE_Isk_per_Hour.My.Resources.Resources._16654_32">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:EVE_Isk_per_Hour.My.Resources.Resources._46_64_1">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:EVE_Isk_per_Hour.My.Resources.Resources._46_64_2">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:EVE_Isk_per_Hour.My.Resources.Resources._7_32_4">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:EVE_Isk_per_Hour.My.Resources.Resources.Digital_Patreon_Wordmark_FieryCoral">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:EVE_Isk_per_Hour.My.Resources.Resources.lpstore">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:EVE_Isk_per_Hour.My.Resources.Resources.lpstore32">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:EVE_Isk_per_Hour.My.Resources.Resources.market32">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:EVE_Isk_per_Hour.My.Resources.Resources.patreon_sm">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="P:EVE_Isk_per_Hour.My.Resources.Resources.PayPalButton">
+<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member>
+<member name="M:EVE_Isk_per_Hour.ESI.#ctor">
+ <summary>
+ Initialize the class variables as needed
+ </summary>
+</member>
+<member name="M:EVE_Isk_per_Hour.ESI.GetAuthorizationToken">
+ <summary>
+ Opens a connection to EVE SSO server and gets an authorization token to get an access token
+ </summary>
+ <returns>Authorization Token</returns>
+</member>
+<member name="M:EVE_Isk_per_Hour.ESI.GetAuthorizationfromWeb(System.String)">
+ <summary>
+ Opens the login for EVE SSO and returns the data stream from a successful log in
+ </summary>
+</member>
+<member name="M:EVE_Isk_per_Hour.ESI.GetAccessToken(System.String,System.Boolean,System.Int64@,System.String@)">
+ <summary>
+ Gets the Access Token data from the EVE server for authorization or refresh tokens.
+ </summary>
+ <param name="Token">An Authorization or Refresh Token</param>
+ <param name="Refresh">If the token is Authorization or Refresh</param>
+ <returns>Access Token Data object</returns>
+</member>
+<member name="M:EVE_Isk_per_Hour.ESI.ValidateToken(EVE_Isk_per_Hour.ESIJWTHeader,EVE_Isk_per_Hour.ESIJWTPayload,System.String)">
+ <summary>
+ Validates the EVE SSO JWT Token for added security, before trusting the access_token and refresh_token
+ We should validate the access token to make sure it has not been tampered with in transit from the SSO to the application.
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:EVE_Isk_per_Hour.ESI.GetPublicData(System.String,System.DateTime@,System.String)">
+ <summary>
+ Queries the server for public data for the URL sent. If not found, returns nothing
+ </summary>
+ <param name="URL">Full public data URL as a string</param>
+ <returns>Byte Array of response or nothing if call fails</returns>
+</member>
+<member name="M:EVE_Isk_per_Hour.ESI.GetPrivateAuthorizedData(System.String,EVE_Isk_per_Hour.ESITokenData,System.DateTime,System.DateTime@,System.Int64,System.Boolean,System.Boolean)">
+ <summary>
+ Queries the server for private, authorized data for data sent. Function will check the 
+ authorization token and update the sent variable and DB data if expired.
+ </summary>
+ <returns>Returns data response as a string</returns>
+</member>
+<member name="M:EVE_Isk_per_Hour.ESI.FormatESITokenData(EVE_Isk_per_Hour.SavedTokenData)">
+ <summary>
+ Formats a SavedTokenData object to ESITokenData
+ </summary>
+ <param name="TokenData">SavedTokenData object</param>
+ <returns>the ESITokenData object</returns>
+</member>
+<member name="M:EVE_Isk_per_Hour.ESI.FormatSavedtokenData(EVE_Isk_per_Hour.ESITokenData)">
+ <summary>
+ Formats a ESITokenData object to SavedTokenData
+ </summary>
+ <param name="TokenData">ESITokenData object</param>
+ <returns>the SavedTokenData object</returns>
+</member>
+<member name="M:EVE_Isk_per_Hour.ESI.FormatESIDate(System.String)">
+ <summary>
+ Formats string dates returned from the ESI server into a date object
+ </summary>
+ <param name="OriginalDate">ESI date value as a string</param>
+ <returns>Date object of the sent date as a string</returns>
+</member>
+<member name="M:EVE_Isk_per_Hour.ESI.SetCharacterData(System.Boolean,EVE_Isk_per_Hour.SavedTokenData@,System.String,System.Boolean,System.Boolean,System.Int64@)">
+ <summary>
+ Gets verification and public data about the character returned from logging into the EVE SSO and authorizing 
+ access for a new character first logging in. If the character has already been loaded, then update the data.
+ </summary>
+ <returns>Returns boolean if the function was successful in setting character data.</returns>    
+</member>
+<member name="M:EVE_Isk_per_Hour.ESI.GetCharacterPublicData(System.Int64,System.DateTime@)">
+ <summary>
+ Retrieves the public data about the character ID sent
+ </summary>
+ <param name="CharacterID">CharacterID you want public data for</param>
+ <returns>Returns data in the ESICharacterPublicData JSON property class</returns>
+</member>
+<member name="T:EVE_Isk_per_Hour.ItemType">
+ <summary>
+ Item Type Definitions - These are set by Cwittofur based on existing data
+ </summary>
+</member>
+<member name="P:EVE_Isk_per_Hour.DoubleTrackBar.SelectedThumb">
+ <summary>
+ Gets the thumb that had focus last.
+ </summary>
+ <returns>The thumb that had focus last.</returns>
+</member>
+<member name="P:EVE_Isk_per_Hour.DoubleTrackBar.ValueLeft">
+ <summary>
+ Gets or sets the position of the left slider.
+ </summary>
+ <returns>The position of the left slider.</returns>
+</member>
+<member name="P:EVE_Isk_per_Hour.DoubleTrackBar.ValueRight">
+ <summary>
+ Gets or sets the position of the right slider.
+ </summary>
+ <returns>The position of the right slider.</returns>
+</member>
+<member name="P:EVE_Isk_per_Hour.DoubleTrackBar.Minimum">
+ <summary>
+ Gets or sets the minimum value.
+ </summary>
+ <returns>The minimum value.</returns>
+</member>
+<member name="P:EVE_Isk_per_Hour.DoubleTrackBar.Maximum">
+ <summary>
+ Gets or sets the maximum value.
+ </summary>
+ <returns>The maximum value.</returns>
+</member>
+<member name="P:EVE_Isk_per_Hour.DoubleTrackBar.Orientation">
+ <summary>
+ Gets or sets the orientation of the control.
+ </summary>
+ <returns>The orientation of the control.</returns>
+</member>
+<member name="P:EVE_Isk_per_Hour.DoubleTrackBar.SmallChange">
+ <summary>
+ Gets or sets the amount of positions the closest slider moves when the control is clicked.
+ </summary>
+ <returns>The amount of positions the closest slider moves when the control is clicked.</returns>
+</member>
+<member name="M:EVE_Isk_per_Hour.Public_Variables.ListViewColumnSorter(System.Int32,System.Windows.Forms.ListView@,System.Int32@,System.Windows.Forms.SortOrder@,System.Boolean)">
+ <summary>
+ 
+ </summary>
+ <param name="ColumnIndex"></param>
+ <param name="RefListView"></param>
+ <param name="ListPrevColumnClicked"></param>
+ <param name="ListPrevColumnSortOrder"></param>
+ <param name="UseSentSortType"></param>
+</member>
+</members>
+</doc>

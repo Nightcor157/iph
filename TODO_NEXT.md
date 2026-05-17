@@ -1,0 +1,332 @@
+# TODO_NEXT.md
+
+## Manual UI Checks
+- Use `UI_SMOKE_CHECKLIST.md` for the next manual WPF pass. It is the primary checklist for interactive checks that cannot be proven by `--smoke-test`.
+- Run the WPF app interactively from Windows/Visual Studio or `OurIPH/OurIPH/bin/Debug/OurIPH.exe` after the automated baseline passes.
+- Manual pass must cover launch/database status, Blueprint search by name/typeID, Rifter, Capital Armor Plates, Revelation, Zirnitra, station/structure/rig impact, price update status, market/contract source display, Top 10/ranking/filtering, rare/officer filtering, queue rows, project creation, project item estimates, build/buy/auto decisions, stock editing, and persistence after restart.
+- Facilities manual pass must also cover creating a new preset, creating/editing an incomplete station, saving despite validation warnings, closing/reopening, confirming system/station/structure/rig/service-module fields persist, and confirming a typed local system such as `Jita` fills system id/security/index display from the local DB.
+- Capture screenshots and exact inputs for any UI overlap, clipped icon/text, confusing status, or calculation mismatch.
+
+## External Or Live-Data Blockers
+- Authenticated private/corporation contract ingestion requires EVE SSO/API credentials and is blocked until auth scope and account setup are available.
+- Live market/SVR/ranking tuning depends on current Fuzzwork/ESI data and should be validated separately from local deterministic checks.
+- Public selected-product and visible top/capital/reaction contract scans are implemented, but real scan quality still depends on live public contract availability.
+- Current system cost index and public/private structure refresh parity with legacy EVE IPH requires live ESI data and, for private structures, authenticated EVE SSO/API credentials. Local cached DB index lookup is implemented; refreshing it is blocked without live access.
+
+## Remaining Local Tasks
+- Before every build, close any running `OurIPH.exe` from this workspace output folders, then use the normal Debug MSBuild output path unless a real blocker remains.
+- Continue moving the Blueprint page toward legacy EVE IPH ergonomics only after the manual checklist identifies concrete UI issues.
+- Continue splitting `MainWindow.xaml.cs` into view models/application services, but do not continue `CalculateBlueprintEstimate` extraction until the remaining local parity tasks below are stronger.
+- ConvertToOre/mineral fallback parity is mapped for safe gate/classification/fallback cases, and the current greedy ore planner is extracted/tested in `OrePlanningService`. Next safe numeric parity step: map the full `ConvertToOre.vb GetOresfromMinerals` LP plan inputs/outputs with a tiny deterministic fixture or compare selected local `REPROCESSING` rows against the extracted planner while keeping LP expected values provisional.
+- Facilities follow-up local task: consider modeling legacy per-activity include-cost/time/usage flags and detailed reprocessing ore/ice/moon refine rates if manual UI testing shows they are needed in the preset workflow. Do not treat this as an extraction task.
+- After ore LP parity and combined recursive surplus/ore fixtures are stronger, consider moving more child recursive estimate delegate wiring or invention/result summary orchestration behind explicit context/dependency boundaries.
+
+## Immediate Tasks
+- Use `UI_SMOKE_CHECKLIST.md` for the next manual WPF pass; it consolidates the interactive checks that cannot be proven by `--smoke-test`.
+- Verify build-chain skill aggregation in the live WPF UI: selecting a capital/complex blueprint should show required skills for buildable components as well as the final blueprint, with duplicate skills using the highest required level.
+- Verify explicit Blueprint search in the live WPF UI: typing `revelation` and pressing `Найти` should show Revelation results immediately even when recommendation filters are enabled, select the first visible row, and also work by product typeID such as `19720`.
+- Run the WPF app interactively from Windows/Visual Studio to verify the full UI workflow beyond `--smoke-test`.
+- Verify the new `Очистить список` Blueprint button and dense-table horizontal scrolling in the live WPF UI.
+- Verify the new `Анализ` page and the simplified legacy-style Blueprint table in the live WPF UI.
+- Verify the compact-density UI pass in the live WPF UI: smaller controls, tighter selected-material/skill grids, and non-clipped `Анализ` contract buttons.
+- Verify the new main Blueprint type toggles in the live WPF UI: ships, ammo/charges, modules, rigs, drones, components, structures, and misc should visibly narrow the blueprint grid.
+- Verify the new right-side selected-blueprint totals panel in the live WPF UI: values should update when selecting a different row and after running estimation.
+- Verify the latest Blueprint layout-density pass in the live WPF UI: sidebar database status should stay at the bottom, search buttons should no longer stretch vertically, and the top filter row should be less empty.
+- Verify the new legacy shell in the live WPF UI: top menu, top tab strip, bottom status bar, compact result rows, and upper-right totals block should all render correctly in the normal Debug build.
+- Verify the functional legacy menu in the live WPF UI: File/Edit/Data/View/Tools commands should route to the expected existing actions and tabs without changing selected data unexpectedly.
+- Verify frozen identity columns in the live WPF UI: product/blueprint columns should stay visible while horizontally scrolling the Blueprint, Analysis, and Build Queue tables.
+- Verify the new lower Blueprint detail split in the live WPF UI: `Component Material List`, recursive `Raw Material List`, and compact skills panel should update when row/runs/ME/facility/reaction depth changes.
+- Verify the latest 1280px Blueprint layout fix in the live WPF UI: search field, station/hub selectors, and first result columns should remain readable at normal window size.
+- Verify the follow-up Blueprint fixes in the live WPF UI: lower panel height, unclipped product/blueprint icons, selected totals identity fields, and `Очистить очередь` from the Blueprint Actions block.
+- Verify the adaptive lower Blueprint panel in the live WPF UI: the splitter should resize Component/Raw/Skills height smoothly, persist its height after closing, lower skill buttons should wrap instead of clipping, and queue status should update in the Blueprint actions block/status bar after add/remove/clear/create-project.
+- Verify numeric input validation in the live WPF UI: calculation, filter, contract price, facility, skill, and stock numeric fields should reject letters and invalid pasted text.
+- Verify copy-only BPC handling in the live WPF UI with Zirnitra: it should show BPC-only/max 1 run, force ME/TE 0/0 in estimates and queue rows, and display copy count such as `BPC 2x1` when two runs are queued.
+- Verify DataGrid edit-mode protection in the live WPF UI: clicking/double-clicking computed columns such as Meta, skills, costs, status, and queue ME/TE should not open an error dialog; only the Projects material `Куплено` column should remain editable.
+- Before every build, close any running `OurIPH.exe` from this workspace output folders, then use the normal Debug MSBuild output path unless a real blocker remains.
+- Validate project stock edits, including the inline bought-quantity grid edit, in the live WPF UI with a real project. Automated XML round-trip coverage now exists, but the actual interactive grid edit still needs a human UI pass.
+
+## Next Implementation Tasks
+- Continue moving the Blueprint page toward legacy EVE IPH ergonomics: keep tightening the top control panel against the old Blueprint tab and validate the new recursive raw-material list against legacy examples. Explicit working `Blueprint Type` filters, top menu/tab shell, bottom status bar, compact result grid, upper-right totals block, and direct/raw material grids are now implemented.
+- Authenticated private/corporation contract ingestion requires EVE SSO/API credentials and is blocked until auth scope and account setup are available. Public selected-product and visible top/capital/reaction scans are implemented.
+
+## Missing Migrations From Legacy Logic
+- More exact parity for legacy blueprint calculations in `Blueprint.vb`, `EVEBlueprints.vb`, `ManufacturingFacility.vb`, `ShoppingList.vb`, and `CurrentProjects.vb`.
+- Complete handling for all production types and edge cases: T2/T3 invention, reactions, capitals, structures, rigs, fuel, R.A.M., nested build/buy planning.
+- Legacy market/fallback behavior for unavailable prices and adjusted prices.
+- Legacy shopping-list/current-project deletion and completion workflows where the new project model differs.
+
+## Technical Debt
+- Current focused checklist - Ore planning service boundary:
+  - [x] Re-read project memory and current `ConvertToOre` parity status before touching ore planning.
+  - [x] Keep full `ConvertToOre.vb` LP numeric parity provisional and do not treat current OurIPH greedy behavior as legacy truth.
+  - [x] Extract current greedy ore candidate construction, batch planning, and purchase-cost behavior from `MainWindow.xaml.cs` into `OrePlanningService`.
+  - [x] Route `ConvertProjectMineralsToOreByWave` and `GetOrePlanPurchaseCost` through `OrePlanningService`.
+  - [x] Add deterministic service tests for ore candidate output, yield flooring, greedy selection order, batch quantity rounding, remaining-requirement clearing, purchase cost, and missing-price control.
+  - [x] Verify normal Debug build, console tests, WPF smoke, and no leftover `OurIPH.exe`.
+- Current focused checklist - Facilities / Station preset persistence and UX:
+  - [x] Re-read project memory and current facility/station status before touching code.
+  - [x] Keep `CalculateBlueprintEstimate`, full `ConvertToOre` LP parity, live ESI/SSO, and calculation formulas unchanged.
+  - [x] Study current `FacilityCatalogService`, `FacilityPresetStore`, `FacilityPreset`/`FacilityStation`, XML settings, and WPF Facilities handlers.
+  - [x] Fix preset persistence so invalid/incomplete station settings are saved with a warning instead of discarded.
+  - [x] Add local DB system lookup on manual system save so system id/region/security/index display can be reused from cached data.
+  - [x] Add selection-loading guard so existing presets are not mutated by combo/list `SelectionChanged` handlers during UI fill.
+  - [x] Repair mojibake in loaded preset/station names and validation messages; replace new default names/no-rig label with readable strings.
+  - [x] Add round-trip regression tests for all preset/station fields, edits after reload, and mojibake repair.
+  - [x] Map legacy facility/system/index behavior from `ManufacturingFacility.vb`, `ESI.vb`, and `ProgramSettings.vb`.
+  - [x] Verify normal Debug build, console tests, WPF smoke, and no leftover `OurIPH.exe`.
+- Current focused checklist - Manual UI smoke preparation:
+  - [x] Re-read project memory and current parity/extraction status before preparing the manual pass.
+  - [x] Keep `CalculateBlueprintEstimate`, full `ConvertToOre` LP numeric parity, live ESI/SSO tasks, and calculation formulas unchanged.
+  - [x] Rewrite `UI_SMOKE_CHECKLIST.md` as a scenario-based manual checklist with actions, expected success signs, and known provisional zones.
+  - [x] Cover launch, Blueprint search, Rifter, Capital Armor Plates, Revelation, Zirnitra, station/rig effects, price source display, Top 10/filtering, rare/officer filtering, queue, projects, stock editing, build/buy/auto, and persistence.
+  - [x] Update `TODO_NEXT.md` to separate manual UI checks, external/live-data blockers, and remaining local tasks.
+  - [x] Verify normal Debug build, console tests, WPF smoke, and no leftover `OurIPH.exe`.
+- Current focused checklist - Project estimate display/summary mapping extraction:
+  - [x] Re-read project memory and current extraction/parity status before touching Project estimate display mapping.
+  - [x] Keep `CalculateBlueprintEstimate` ownership and full `ConvertToOre` LP numeric parity unchanged.
+  - [x] Add `ProjectItemEstimateDisplayService` for project row revenue/status/copy-only/price-source display mapping.
+  - [x] Route `ApplyProjectItemEstimates` through the new project display service instead of assembling display fields in `MainWindow.xaml.cs`.
+  - [x] Add `ProjectQueueDisplayService` for project job material blocker status text.
+  - [x] Add regression tests for project item summary/profit/ROI, contract price display, copy-only status, build/buy line counts, and project job material blocker status.
+  - [x] Verify normal Debug build, console tests, WPF smoke, and no leftover `OurIPH.exe`.
+- Current focused checklist - Estimate summary/display mapping extraction:
+  - [x] Re-read project memory and current extraction/parity status before touching estimate display mapping.
+  - [x] Keep `CalculateBlueprintEstimate` ownership and full `ConvertToOre` LP numeric parity unchanged.
+  - [x] Extend `BlueprintEstimateApplicationService` to apply blueprint display-ready product fields: produced quantity, market volume, contract unit price, price source, and price details.
+  - [x] Preserve existing stale-field clearing behavior for the older estimate application overload.
+  - [x] Remove obsolete `MainWindow.xaml.cs` `SetEstimate` wrappers and route Blueprint estimate display mapping through the service.
+  - [x] Add regression tests for summary/profit recalculation and contract/market source display mapping.
+  - [x] Verify normal Debug build, console tests, WPF smoke, and no leftover `OurIPH.exe`.
+- Current focused checklist - CalculateBlueprintEstimate safe orchestration boundary:
+  - [x] Re-read project memory and current legacy parity state before extraction.
+  - [x] Keep full `CalculateBlueprintEstimate` ownership in `MainWindow.xaml.cs`; extract only safe glue.
+  - [x] Add `BlueprintEstimateMaterialOrchestrationService` for context/dependency creation, material traversal invocation, and mineral-purchase aggregation.
+  - [x] Add `BlueprintEstimateResultAssembler` for final `BlueprintEstimate` object assembly.
+  - [x] Remove unused lower-level traversal/line/build-buy service fields from `MainWindow.xaml.cs`.
+  - [x] Add tests for context/dependency pass-through, traversal aggregation, mineral fallback aggregation, and final estimate assembly.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the extraction.
+  - [x] Keep full `ConvertToOre` LP numeric parity provisional and untouched.
+- Current focused checklist - Surplus / excess / sellback legacy parity:
+  - [x] Re-read legacy `Blueprint.vb GetAdjustedQuantity`, `UseExcessMaterials`, `AdjustSellExcessValue`, `SetPriceData`, and `GetBuildFlag`.
+  - [x] Map no-leftover, partial-leftover, and full-leftover behavior from legacy source.
+  - [x] Add narrow parity tests for excess lookup and later consumption.
+  - [x] Add narrow parity tests for sellback disabled, sellback enabled, tax/broker deduction, and clamp-to-zero behavior.
+  - [x] Add an explicit service boundary flag for `ApplySurplusOffset` so legacy `SellExcessItems = False` can be represented without changing current default behavior.
+  - [x] Document the partial-leftover `UsedExcessMaterials` quirk from legacy source.
+  - [x] Keep ore/mineral fallback and full end-to-end profit/IPH parity provisional.
+- Current focused checklist - Recursive component-cost legacy parity harness:
+  - [x] Re-read legacy `Blueprint.vb BuildItem` recursive component path, child run propagation, build/buy comparison, and component cost insertion.
+  - [x] Add a test-only bounded recursive cost harness using confirmed legacy formulas instead of current OurIPH final estimates.
+  - [x] Add numeric recursive parity for `Capital Armor Plates` building `Reinforced Carbon Fiber`.
+  - [x] Add a path/cycle guard fixture that falls back to component buy cost when the child is already in the path.
+  - [x] Add a small `Revelation` -> `Capital Armor Plates` numeric recursive fragment.
+  - [x] Compare legacy-derived recursive expected values against the delegate-backed traversal service.
+  - [x] Keep surplus sellback, ore/mineral fallback, user-owned BP ME/TE, and full profit/ISK-hour out of this harness until explicitly mapped.
+- Current focused checklist - Numeric legacy parity material cost and fees:
+  - [x] Re-read legacy `Material.vb` / `Materials.vb` cost accumulation before adding expected material-cost values.
+  - [x] Re-read legacy `Blueprint.vb SetManufacturingCostsAndFees` before adding expected usage-fee values.
+  - [x] Add deterministic database-backed direct material cost parity for `Rifter`.
+  - [x] Add deterministic database-backed direct material cost parity for `Capital Armor Plates`.
+  - [x] Add deterministic database-backed EIV and manufacturing usage fee parity for a simple `Rifter` fragment.
+  - [x] Compare confirmed legacy-derived expected values against the extracted traversal/math services without moving more of `CalculateBlueprintEstimate`.
+  - [x] Keep recursive component final cost, surplus sellback, mineral/ore fallback, and profit/ISK-hour parity provisional.
+- Current focused checklist - Numeric legacy parity foundation:
+  - [x] Re-read legacy `Blueprint.vb` formulas before adding numeric expected values.
+  - [x] Split database-backed test names into structural golden and numeric legacy parity coverage.
+  - [x] Add numeric parity tests for direct material quantity adjustment using legacy `BuildItem` formula.
+  - [x] Add numeric parity tests for a simple production-time fragment using legacy `SetProductionTime` / `SetBPTimeModifier` formula.
+  - [x] Add a small Revelation child-run numeric fragment without attempting full recursive final cost parity.
+  - [x] Keep final material cost/profit/ISK-hour parity provisional.
+- Current focused checklist - Legacy/database-backed golden fixture foundation:
+  - [x] Identify local database/static data files used without external access.
+  - [x] Select real blueprint fixtures: simple T1, component-chain, capital-like chain, and copy-only/special.
+  - [x] Create `LEGACY_PARITY_MAP.md` mapping legacy VB.NET files/methods to current OurIPH services and known coverage gaps.
+  - [x] Add database-backed tests that load real fixtures via `EveDatabaseService`.
+  - [x] Cover real material lines, child blueprint resolution, cycle/path guard behavior, surplus/build branch safety, missing price behavior, and copy-only state.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the fixture work.
+- Current focused checklist - Delegate-backed material traversal extraction:
+  - [x] Add `BlueprintEstimateMaterialTraversalService` backed by explicit context/dependency delegates instead of direct UI/database ownership.
+  - [x] Move material traversal orchestration for adjusted quantities, surplus offsets, mineral fallback aggregation, child estimate delegate calls, market-volume-short detection, and build/buy decision branching out of `CalculateBlueprintEstimate`.
+  - [x] Keep full recursive estimate ownership, UI state, and database-specific wiring in `MainWindow.xaml.cs` through delegates.
+  - [x] Add characterization tests for no-child traversal, child recursion, surplus-before-decision, missing prices, market-volume-short, cycle/path guard, mineral fallback, and buy-vs-build branches.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the extraction.
+- Current focused checklist - CalculateBlueprintEstimate migration foundation:
+  - [x] Document `CalculateBlueprintEstimate` decomposition into cache/setup, material pricing, recursion, child lookup, surplus, mineral/ore fallback, build/buy, invention, and final assembly blocks.
+  - [x] Add explicit context/result foundation models for future transfer.
+  - [x] Add characterization/golden tests for material lines, missing price/cache, market-volume-short, child requests, copy-only child runs, path/cycle guard, and surplus offsets.
+  - [x] Extract path/cycle guard, child request creation, parent path enter/exit, and surplus offset application.
+  - [x] Extract material price delegate wrapper for adjusted quantity, unit price, buy cost, and market-volume-short.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Recursive estimate orchestration extraction:
+  - [x] Add context/result objects for extracted invention and build/buy calculation slices.
+  - [x] Extract invention source/material/decryptor/copy cost accumulation.
+  - [x] Extract invention/copy time accumulation.
+  - [x] Extract science job usage cost formula.
+  - [x] Extract Invention/Copying activity station fallback orchestration.
+  - [x] Extract station candidate filtering and best station/decryptor winner selection.
+  - [x] Extract recursive material build/buy decision rule.
+  - [x] Add regression tests for the new services.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Estimate orchestration service extraction:
+  - [x] Move `BlueprintEstimate` out of `MainWindow.xaml.cs` into a reusable model.
+  - [x] Extract Blueprint estimate result application and stale market/liquidity reset behavior.
+  - [x] Extract Project item estimate result application and unavailable-station reset behavior.
+  - [x] Extract copy-only/BPC status text and estimate status priority formatting.
+  - [x] Extract recursive estimate cache key/clone behavior.
+  - [x] Extract manufacturing multiplier, facility bonus, time multiplier, and installation-cost formulas.
+  - [x] Add regression tests for the new services.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Local audit refresh after efficiency/import/SVR/store passes:
+  - [x] Refresh `LOCAL_TECH_DEBT_AUDIT.md` with current `MainWindow.xaml.cs` line count.
+  - [x] Update `PROJECT_LAYOUT.md` service map for efficiency, material import, and SVR services.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after documentation updates.
+- Current focused checklist - Contract price store round-trip tests:
+  - [x] Add test path injection to `ContractPriceStore`.
+  - [x] Add regression tests for rich contract metadata XML round-trip.
+  - [x] Add regression coverage for stale/invalid sample filtering.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the store/test changes.
+- Current focused checklist - Market cache store round-trip tests:
+  - [x] Add test path injection to `MarketPriceCacheStore`.
+  - [x] Add test path injection to `MarketHistoryCacheStore`.
+  - [x] Add regression tests for XML round-trip persistence of price and history cache rows.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the store/test changes.
+- Current focused checklist - Sales volume ratio service extraction:
+  - [x] Extract duplicated blueprint/project item SVR application from `MainWindow.xaml.cs`.
+  - [x] Preserve total sold/orders, average items per order, trend, SVR, and SVR*ISK/hour behavior.
+  - [x] Add regression tests for blueprint rows, project items, and zero-volume reset behavior.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Blueprint efficiency service extraction:
+  - [x] Extract effective ME/TE behavior from `MainWindow.xaml.cs`.
+  - [x] Extract default child blueprint efficiency behavior for owned, T1, T2, reaction, and copy-only cases.
+  - [x] Add regression tests for invention/decryptor, copy-only, reaction, owned, T2, and facility default behavior.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Project material clipboard import extraction:
+  - [x] Extract project bought/owned material clipboard parsing from `MainWindow.xaml.cs`.
+  - [x] Preserve exact-name, prefix-name, longest-name, and quantity parsing behavior.
+  - [x] Add regression tests for repeated rows, unknown materials, case-insensitive names, and grouped quantities.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Local audit refresh after queue/project/production extractions:
+  - [x] Refresh `LOCAL_TECH_DEBT_AUDIT.md` with current `MainWindow.xaml.cs` line/helper counts.
+  - [x] Update `PROJECT_LAYOUT.md` service map for queue, project decision, used-by, and production type services.
+  - [x] Re-scan active source for TODO/FIXME/HACK/XXX markers.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after documentation updates.
+- Current focused checklist - Blueprint production type service extraction:
+  - [x] Extract production type classification from `MainWindow.xaml.cs`.
+  - [x] Extract invention production type, build wave, faction warfare multiplier, parallel job time, and production-time batching helpers.
+  - [x] Add regression tests for production classification, waves, FW multiplier, and timing behavior.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Project material used-by list extraction:
+  - [x] Extract project material `UsedBy` unique-name aggregation from `MainWindow.xaml.cs`.
+  - [x] Keep project material row construction in the window but delegate string-list behavior.
+  - [x] Add regression tests for append, duplicate suppression, and empty inputs.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Build project decision service extraction:
+  - [x] Extract Build/Buy/Auto decision lookup from `MainWindow.xaml.cs`.
+  - [x] Extract Build/Buy/Auto decision mutation from `MainWindow.xaml.cs`.
+  - [x] Add regression tests for set/update/clear behavior and invalid type IDs.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Build queue profitable candidate extraction:
+  - [x] Extract `Прибыльные в очередь` candidate filtering/sorting from `MainWindow.xaml.cs`.
+  - [x] Preserve rank-first ordering with SVR*ISK/hour and profit tie breakers.
+  - [x] Add regression tests for filtering, ordering, and max-count limiting.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Build queue merge service extraction:
+  - [x] Extract add-or-merge queue item behavior from `MainWindow.xaml.cs`.
+  - [x] Extract queue status text formatting into a service.
+  - [x] Add regression tests for merge keys, run increment behavior, refreshed blueprint references, and separate efficiency rows.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Local audit refresh:
+  - [x] Refresh `LOCAL_TECH_DEBT_AUDIT.md` after the latest service extractions.
+  - [x] Update `PROJECT_LAYOUT.md` service map for new market cache, price selection, sales fee, and UI settings services.
+  - [x] Re-scan active source for TODO/FIXME/HACK/XXX markers.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after documentation updates.
+- Current focused checklist - Sales fee service extraction:
+  - [x] Extract sales tax, broker fee, station sales fee, and net revenue math from `MainWindow.xaml.cs`.
+  - [x] Route project/blueprint/decryptor/surplus revenue calculations through the service.
+  - [x] Add regression tests for skill-adjusted tax, broker minimum/special modes, station fee, and clamping.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Market price selection service extraction:
+  - [x] Extract price modifier math from `MainWindow.xaml.cs`.
+  - [x] Extract Min Sell/Max Buy unit-price and volume selection behavior.
+  - [x] Add regression tests for modifier clamping, product volume fallback, and strict material volume behavior.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Market history cache service extraction:
+  - [x] Extract market-history cache merge/fallback logic from `MainWindow.xaml.cs`.
+  - [x] Extract market-history cache upsert mutation from `MainWindow.xaml.cs`.
+  - [x] Add regression tests for newest cached fallback, region/day filtering, update/add, and timestamp behavior.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Market price cache service extraction:
+  - [x] Extract cached-price lookup from `MainWindow.xaml.cs`.
+  - [x] Extract market price cache upsert mutation from `MainWindow.xaml.cs`.
+  - [x] Add regression tests for latest-entry selection, location filtering, row update/add, and missing type names.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Settings path consolidation:
+  - [x] Add one shared settings-directory helper in `AppPaths`.
+  - [x] Move store default constructors off repeated `WorkspaceRoot/OurIPH/Settings` path construction.
+  - [x] Verify no active service keeps duplicated settings path construction.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the path cleanup.
+- Current focused checklist - UI settings store extraction:
+  - [x] Extract `UiSettings.xml` load/save from `MainWindow.xaml.cs`.
+  - [x] Add a typed `UiSettings` model and reusable `UiSettingsStore`.
+  - [x] Add regression tests for missing-file defaults and round-trip persistence.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Local technical debt audit and layout docs:
+  - [x] Scan active `OurIPH` source for `TODO`, `FIXME`, `HACK`, and `XXX` markers outside build artifacts.
+  - [x] Document `MainWindow.xaml.cs` hotspots and next local extraction candidates.
+  - [x] Add a service map to `PROJECT_LAYOUT.md`.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after documentation updates.
+- Current focused checklist - Price update status extraction:
+  - [x] Extract pure price refresh status formatting from `MainWindow.xaml.cs` into a service.
+  - [x] Keep the WPF refresh workflow in the window but make progress/completion/error text deterministic.
+  - [x] Add regression tests for progress, completion, cache/missing counts, clamping, timestamp, and last-error behavior.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Numeric input validation extraction:
+  - [x] Extract pure numeric validation from `MainWindow.xaml.cs` into a service.
+  - [x] Keep WPF event handling in the window but make validation testable.
+  - [x] Add regression tests for integer/decimal/negative/partial/final input behavior.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Blueprint build profile extraction:
+  - [x] Extract T2/T3/Capital/Reactions/Limited/Rare build-profile checks from `MainWindow.xaml.cs` into a testable service.
+  - [x] Preserve existing checkbox behavior through UI-created options.
+  - [x] Add regression tests for T2, T3, capitals, reactions, limited-source, and rare/officer toggles.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Blueprint type filter extraction:
+  - [x] Extract Blueprint Type category detection from `MainWindow.xaml.cs` into a testable service.
+  - [x] Keep UI behavior identical for Ships, Ammo/Charges, Modules, Rigs, Drones, Components, Structures, and Misc.
+  - [x] Add regression tests for representative type categories and misc fallback behavior.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the refactor.
+- Current focused checklist - Blueprint list filter clarity/testability:
+  - [x] Extract main Blueprint list filtering decisions from `MainWindow.xaml.cs` into a testable service.
+  - [x] Make `List filter` labels/tooltips/status explain that Top N is computed after `Оценить` from rank/score, not from visible row order.
+  - [x] Add regression tests for profitable/no-price/low-volume/top/explicit-search filtering.
+  - [x] Verify normal Debug build, console tests, and WPF smoke after the filter refactor.
+- Continue splitting `MainWindow.xaml.cs` into view models/application services. Ranking, profitability, project material stock math, estimate application/status/cache/math slices, blueprint and project display-ready price/source mapping, project job material blocker status formatting, invention cost/time/usage slices, station/decryptor winner selection, material build/buy decisions, path/cycle guard, surplus offsets, material price line wrappers, delegate-backed material traversal, material traversal orchestration, and final estimate object assembly are now extracted; the remaining blueprint estimation candidate is full database-backed recursive estimate ownership and the window-owned recursive delegate wiring.
+- ConvertToOre/mineral fallback parity is now mapped for the safe gate/classification/fallback cases, and the current greedy ore planner is extracted into `OrePlanningService`. Next safe numeric parity step before any further `CalculateBlueprintEstimate` extraction: map the full `ConvertToOre.vb GetOresfromMinerals` LP plan inputs/outputs with a tiny deterministic fixture or compare selected local `REPROCESSING` rows against the extracted planner. Keep expected numeric ore quantities provisional unless they are derived from legacy source/settings and not current OurIPH behavior.
+- After ore LP parity and combined recursive surplus/ore fixtures are stronger, consider moving more of the child recursive estimate delegate wiring or invention/result summary orchestration behind explicit context/dependency boundaries. Do not move the whole method until golden tests cover child blueprint lookup, mineral/ore fallback, surplus offsets, invention/decryptor integration, and final material/profit numbers.
+- Add tests around full recursive estimate traversal and additional public contract ingestion edge cases. Material adjustment, deterministic invention planning, invention cost accumulation, path/cycle guard, surplus offsets, material-line pricing, delegate-backed material traversal, and database-backed fixture chains now have focused service coverage.
+- Consider moving retry/download policy into a richer shared HTTP helper; timeout web-client duplication has been removed.
+- Avoid hard-coded paths where possible; `PROJECT_LAYOUT.md` now documents current settings/runtime path policy.
+- Keep `PROJECT_LAYOUT.md` current if source/runtime folder policy changes.
+
+## Runtime And Build Issues
+- Root folder is not a single git repository; nested upstream repos are clean, but `OurIPH` itself is not tracked as its own git repo.
+- Access from Windows to WSL paths can trigger Git `dubious ownership`; use one-shot `git -c safe.directory='*'` for read-only status if needed.
+- Build verification is available in this Windows-capable session. Use the documented MSBuild command, run `OurIPH.Tests.exe`, and run WPF smoke with `Start-Process -Wait -PassThru` to observe the real process exit code.
+- Operational rule: close workspace `OurIPH.exe` processes before MSBuild and verify smoke-test processes have exited afterward, so `bin` does not accumulate extra verification folders.
+- Network calls may fail because of sandbox/network restrictions or ESI/Fuzzwork availability; Fuzzwork and ESI now have limited timeout/retry handling, but UI cancellation/progress is still missing.
+
+## UI TODO
+- Optional: add an in-app editor for `OurIPH/Settings/BlueprintFilterRules.xml`. Rules are now editable through settings XML and loaded at startup.
+
+## Contract Pricing TODO
+- Manual samples and selected-product public ESI samples are supported.
+- Visible top/capital/reaction public ESI scans are supported from the Blueprints page.
+- Persist exact included type IDs later if a separate richer contract model is added; current persisted metadata records contract ID, location, quantity, item count, source, and title.
+- Tune anomaly thresholds against real observed capital ship contract data.
+- Prefer contract pricing for capital ships and other categories where market orders are thin or misleading.
+
+## SVR And Ranking TODO
+- Continue validating the new top score against real production candidates from live market data.
+- Consider adding separate displayed score components: liquidity, profit, ROI, confidence, trend, and penalty.
+- Low-volume products are hidden by default in top recommendations unless the user explicitly turns off `Скрыть малый рынок`; continue tuning the threshold with live examples.
+- Keep capital and reaction filters configurable.

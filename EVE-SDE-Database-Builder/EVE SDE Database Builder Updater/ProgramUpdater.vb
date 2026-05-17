@@ -1,0 +1,296 @@
+﻿Imports System.IO
+
+Imports System.Net.Http
+Imports System.Security.Cryptography
+Imports System.Xml
+
+Public Enum UpdateCheckResult
+    UpdateError = -1
+    UpToDate = 0
+    UpdateAvailable = 1
+End Enum
+
+''' <summary>
+''' Class downloads a file from the server with MD5 hashes and checks them with the current files to determine 
+''' if an update is needed, then it updates them if needed.
+''' </summary>
+Public Class ProgramUpdater
+
+    ' XML Temp file path for server file
+    Public ServerXMLLastUpdatePath As String
+
+    Public Const XMLLatestVersionFileName As String = "LatestVersionESDEDB.xml"
+    Public Const UpdaterFileName As String = "ESDEDB Updater.exe"
+    Public Const UpdatePath As String = "Updates\"
+    Public UserWorkingFolder As String = "" ' Where the DB and updater and anything that changes files will be
+    Public UpdaterFilePath As String = "" ' Where the update files are stored
+
+    ' File Path
+    Public Const XMLUpdateFileURL = "https://raw.githubusercontent.com/EVEIPH/EVE-SDE-Database-Builder/master/Latest%20Files/LatestVersionESDEDB.xml"
+
+    ' When constructed, it will load the settings XML file into the class
+    Public Sub New()
+
+        UpdaterFilePath = UpdatePath
+
+        ' Create the updates folder
+        If Directory.Exists(UpdaterFilePath) Then
+            ' Delete what is there and replace
+            Dim ImageDir As New DirectoryInfo(UpdaterFilePath)
+            ImageDir.Delete(True)
+        End If
+
+        Directory.CreateDirectory(UpdaterFilePath)
+
+        ' Get the newest updatefile from server
+        ServerXMLLastUpdatePath = DownloadFileFromServer(XMLUpdateFileURL, UpdaterFilePath & XMLLatestVersionFileName)
+
+    End Sub
+
+    ''' <summary>
+    ''' Deletes the files and directory used for updates
+    ''' </summary>
+    Public Sub CleanUpFiles()
+
+        On Error Resume Next
+
+        ' Delete the updates folder (new one will be made in updater)
+        Dim ImageDir As New DirectoryInfo(UpdaterFilePath)
+        ImageDir.Delete(True)
+
+    End Sub
+
+    ' File info with MD5 for comparision
+    Private Structure MD5FileInfo
+        Dim MD5 As String
+        Dim URL As String
+        Dim FileName As String
+    End Structure
+
+    ''' <summary>
+    ''' Checks the updater file to see if it needs to be updated, updates it if needed, then shells to the updater and closes this application
+    ''' </summary>
+    Public Sub RunUpdate()
+        Dim m_xmld As New XmlDocument
+        Dim m_nodelist As XmlNodeList
+        Dim m_node As XmlNode
+
+        Dim UpdateFiles As New List(Of MD5FileInfo)
+        Dim TempUpdateFile As New MD5FileInfo
+
+        Dim UpdaterServerFileURL As String = ""
+        Dim UpdaterServerFileMD5 As String = ""
+
+        Dim fi As FileInfo
+
+        On Error GoTo DownloadError
+
+        ' Wait for a second before running - might solve the problem with incorrectly suggesting an update
+        Threading.Thread.Sleep(1000)
+
+        'Load the server XML file
+        m_xmld.Load(ServerXMLLastUpdatePath)
+        m_nodelist = m_xmld.SelectNodes("/EVESDEDB/result/rowset/row")
+
+        ' Loop through the nodes and find the MD5 and download URL for the updater and any other files necessary to load the updater
+        For Each m_node In m_nodelist
+            If m_node.Attributes.GetNamedItem("Name").Value = UpdaterFileName Then
+                TempUpdateFile.MD5 = m_node.Attributes.GetNamedItem("MD5").Value
+                TempUpdateFile.URL = m_node.Attributes.GetNamedItem("URL").Value
+                TempUpdateFile.FileName = UpdaterFileName
+                UpdateFiles.Add(TempUpdateFile)
+            End If
+        Next
+
+        ' Download the files if necessary
+        For Each UpdateFile In UpdateFiles
+            ' Download each file needed
+            If DownloadUpdatedFile(UpdateFile.MD5, UpdateFile.URL, UpdateFile.FileName) = "Download Error" Then
+                GoTo DownloadError
+            End If
+        Next
+
+        On Error Resume Next
+
+        ' Don't delete the update file or folder (it will get deleted on startup of this or updater anyway
+        ' Perserve the old XML file until we finish the updater - if only the updater needs to be updated, 
+        ' then it will copy over the new xml file when it closes
+
+        ' Get the directory path of this program to send to updater
+        Dim ProcInfo As New ProcessStartInfo With {
+            .WindowStyle = ProcessWindowStyle.Normal,
+            .FileName = UpdaterFileName,
+            .Arguments = String.Empty
+        }
+        Process.Start(ProcInfo)
+
+        ' Close this program
+        End
+
+DownloadError:
+
+        ' Some sort of problem, we will just update the whole thing and download the new XML file
+        If Err.Description <> "" Then
+            MsgBox("Unable to download updates at this time. Please try again later." & Environment.NewLine & "Error: " & Err.Description, vbCritical, Application.ProductName)
+        Else
+            MsgBox("Unable to download updates at this time. Please try again later.", vbCritical, Application.ProductName)
+        End If
+
+        Exit Sub
+
+    End Sub
+
+    ''' <summary>
+    ''' Checks the Server file MD5 against the Local file MDF and downloads the new file for the file name sent
+    ''' </summary>
+    ''' <param name="ServerFileMD5">MD5 of the file on the server (from the Update XML file)</param>
+    ''' <param name="ServerFileURL">URL of the server file</param>
+    ''' <param name="Filename">File name we are comparing</param>
+    ''' <returns>If it errors, will return text stating error, else empty string</returns>
+    Private Function DownloadUpdatedFile(ServerFileMD5 As String, ServerFileURL As String, Filename As String) As String
+        Dim LocalFileMD5 As String
+        Dim ServerFilePath As String
+        Dim fi As FileInfo
+
+        ' Get the local updater MD5, if not found, we run update anyway
+        LocalFileMD5 = MD5CalcFile(UserWorkingFolder & UpdaterFileName)
+
+        If LocalFileMD5 <> ServerFileMD5 Then
+            ' Update the updater file, download the new file
+            ServerFilePath = DownloadFileFromServer(ServerFileURL, UpdaterFilePath & Filename)
+
+            If MD5CalcFile(ServerFilePath) <> ServerFileMD5 Then
+                ' Try again
+                ServerFilePath = DownloadFileFromServer(ServerFileURL, UpdaterFilePath & Filename)
+
+                If MD5CalcFile(ServerFilePath) <> ServerFileMD5 Or ServerFilePath = "" Then
+                    ' Download error, just leave because we want this update to go through before running
+                    Return "Download Error"
+                End If
+            End If
+
+            ' Delete the old file, rename the new
+            If File.Exists(UserWorkingFolder & Filename) Then
+                File.Delete(UserWorkingFolder & Filename)
+            End If
+
+            ' Move the downloaded file
+            fi = New FileInfo(ServerFilePath)
+            fi.MoveTo(UserWorkingFolder & Filename)
+        End If
+
+        Return ""
+
+    End Function
+
+    ''' <summary>
+    ''' Function just takes the download date of the current XML file and compares to one on server. If date is newer, then runs update
+    ''' </summary>
+    ''' <returns>Returns the result of checking for the update</returns>
+    Public Function IsProgramUpdatable() As UpdateCheckResult
+        Dim LocalMD5 As String
+        Dim ServerMD5 As String
+
+        Try
+
+            ' Get the hash of the local XML
+            LocalMD5 = MD5CalcFile(XMLLatestVersionFileName)
+
+            If ServerXMLLastUpdatePath <> "" Then
+                ' Get the hash of the server XML
+                ServerMD5 = MD5CalcFile(UpdaterFilePath & XMLLatestVersionFileName)
+            Else
+                Return UpdateCheckResult.UpdateError
+            End If
+
+            ' If the hashes are not equal, then we want to run the update
+            If LocalMD5 <> ServerMD5 Then
+                Return UpdateCheckResult.UpdateAvailable
+            Else ' No update needed
+                Return UpdateCheckResult.UpToDate
+            End If
+
+        Catch ex As Exception
+            ' File didn't download, so either try again later or some other error that is unhandled
+            Return UpdateCheckResult.UpdateError
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Downloads the sent file from server and saves it to the root directory as the sent file name
+    ''' </summary>
+    ''' <param name="DownloadURL">URL to download the file</param>
+    ''' <param name="FileName">File name of downloaded file</param>
+    ''' <returns>File Name of where the downloaded file was saved.</returns>
+    Public Async Function DownloadFileFromServerAsync(DownloadURL As String, FileName As String) As Task(Of String)
+        Try
+            Using client As New HttpClient()
+                ' Optional: disable proxy like your old code
+                Dim handler = New HttpClientHandler() With {
+                .Proxy = Nothing,
+                .UseProxy = False
+            }
+
+                Using http As New HttpClient(handler)
+                    Dim data As Byte() = Await http.GetByteArrayAsync(DownloadURL)
+                    Await File.WriteAllBytesAsync(FileName, data)
+                End Using
+            End Using
+
+            ' Normalize line endings for .txt files
+            If FileName.EndsWith(".txt", StringComparison.OrdinalIgnoreCase) Then
+                Dim text = Await File.ReadAllTextAsync(FileName)
+                text = text.Replace(Chr(10), vbCrLf)
+                Await File.WriteAllTextAsync(FileName, text)
+            End If
+
+            Return FileName
+
+        Catch ex As Exception
+            MsgBox("An error occurred while downloading update file: " & ex.Message,
+               vbCritical, Application.ProductName)
+            Return ""
+        End Try
+    End Function
+
+    Public Function DownloadFileFromServer(url As String, fileName As String) As String
+        Return DownloadFileFromServerAsync(url, fileName).GetAwaiter().GetResult()
+    End Function
+
+    ''' <summary>
+    ''' Calculates the MD5 hash for the sent file.
+    ''' </summary>
+    ''' <param name="filepath">File to calculate an MD5 for</param>
+    ''' <returns>The formatted hash as a string</returns>
+
+    Public Function MD5CalcFile(filepath As String) As String
+        If Not IO.File.Exists(filepath) Then
+            Return ""
+        End If
+
+        Using stream As New IO.FileStream(filepath, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
+            Using md5 As MD5 = MD5.Create()
+                Dim hash As Byte() = md5.ComputeHash(stream)
+                Return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant()
+            End Using
+        End Using
+    End Function
+
+    ''' <summary>
+    ''' Converts byte array to a hex string for MD5 hash
+    ''' </summary>
+    ''' <param name="arrInput">Array of bytes</param>
+    ''' <returns>Hex string of bytes input</returns>
+    Private Function ByteArrayToString(ByVal arrInput() As Byte) As String
+
+        Dim sb As New System.Text.StringBuilder(arrInput.Length * 2)
+
+        For i As Integer = 0 To arrInput.Length - 1
+            sb.Append(arrInput(i).ToString("X2"))
+        Next
+
+        Return sb.ToString().ToLower
+
+    End Function
+
+End Class

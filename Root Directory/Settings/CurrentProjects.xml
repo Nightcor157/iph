@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CurrentProjects>
+  <Project Id="f92e0789-6bd6-45ba-a523-185e961729e2" Name="Проект 08.05.2026 15:55" Created="2026-05-08T15:55:14.2381976+03:00">
+    <Items>
+      <Row TypeID="73790" Name="Revelation Navy Issue" Needed="1" Cycles="0" Produced="0" Excess="0" Remaining="1" ME="0" Notes="" />
+    </Items>
+    <BuildItems>
+      <Row TypeID="57455" Name="Thermosetting Polymer (Runs: 138)" Needed="27600" Cycles="138" Produced="27600" Excess="0" Remaining="27600" ME="0" Notes="" />
+      <Row TypeID="57453" Name="Carbon Fiber (Runs: 138)" Needed="27600" Cycles="138" Produced="27600" Excess="0" Remaining="27600" ME="0" Notes="" />
+      <Row TypeID="57457" Name="Reinforced Carbon Fiber (Runs: 138)" Needed="27470" Cycles="138" Produced="27600" Excess="130" Remaining="27470" ME="0" Notes="" />
+      <Row TypeID="16661" Name="Sulfuric Acid (Runs: 89)" Needed="17800" Cycles="89" Produced="17800" Excess="0" Remaining="17800" ME="0" Notes="" />
+      <Row TypeID="16659" Name="Carbon Polymers (Runs: 89)" Needed="17800" Cycles="89" Produced="17800" Excess="0" Remaining="17800" ME="0" Notes="" />
+      <Row TypeID="57456" Name="Pressurized Oxidizers (Runs: 89)" Needed="17660" Cycles="89" Produced="17800" Excess="140" Remaining="17660" ME="0" Notes="" />
+      <Row TypeID="30303" Name="Fulleroferrocene (Runs: 2)" Needed="1320" Cycles="2" Produced="2000" Excess="680" Remaining="1320" ME="0" Notes="" />
+      <Row TypeID="33360" Name="Terahertz Metamaterials (Runs: 4)" Needed="1120" Cycles="4" Produced="1200" Excess="80" Remaining="1120" ME="0" Notes="" />
+      <Row TypeID="30309" Name="Graphene Nanoribbons (Runs: 10)" Needed="1120" Cycles="10" Produced="1200" Excess="80" Remaining="1120" ME="0" Notes="" />
+      <Row TypeID="30305" Name="Fullerene Intercalated Graphite (Runs: 7)" Needed="780" Cycles="7" Produced="840" Excess="60" Remaining="780" ME="0" Notes="" />
+      <Row TypeID="30310" Name="Carbon-86 Epoxy Resin (Runs: 5)" Needed="760" Cycles="5" Produced="800" Excess="40" Remaining="760" ME="0" Notes="" />
+      <Row TypeID="57459" Name="Hypnagogic Neurolink Enhancer (Runs: 36)" Needed="720" Cycles="36" Produced="720" Excess="0" Remaining="720" ME="0" Notes="" />
+      <Row TypeID="4246" Name="Hydrogen Fuel Block (Runs: 18)" Needed="715" Cycles="18" Produced="720" Excess="5" Remaining="715" ME="0" Notes="" />
+      <Row TypeID="4247" Name="Helium Fuel Block (Runs: 18)" Needed="690" Cycles="18" Produced="720" Excess="30" Remaining="690" ME="0" Notes="" />
+      <Row TypeID="4312" Name="Oxygen Fuel Block (Runs: 18)" Needed="685" Cycles="18" Produced="720" Excess="35" Remaining="685" ME="0" Notes="" />
+      <Row TypeID="4051" Name="Nitrogen Fuel Block (Runs: 14)" Needed="540" Cycles="14" Produced="560" Excess="20" Remaining="540" ME="0" Notes="" />
+      <Row TypeID="30311" Name="C3-FTM Acid (Runs: 6)" Needed="520" Cycles="6" Produced="600" Excess="80" Remaining="520" ME="0" Notes="" />
+      <Row TypeID="33337" Name="Promethium Mercurite (Runs: 2)" Needed="400" Cycles="2" Produced="400" Excess="0" Remaining="400" ME="0" Notes="" />
+      <Row TypeID="57478" Name="Auto-Integrity Preservation Seal (Runs: 134)" Needed="400" Cycles="134" Produced="402" Excess="2" Remaining="400" ME="0" Notes="" />
+      <Row TypeID="16657" Name="Rolled Tungsten Alloy (Runs: 2)" Needed="400" Cycles="2" Produced="400" Excess="0" Remaining="400" ME="0" Notes="" />
+      <Row TypeID="30307" Name="Lanthanum Metallofullerene (Runs: 4)" Needed="380" Cycles="4" Produced="480" Excess="100" Remaining="380" ME="0" Notes="" />
+      <Row TypeID="30304" Name="PPD Fullerene Fibers (Runs: 2)" Needed="380" Cycles="2" Produced="500" Excess="120" Remaining="380" ME="0" Notes="" />
+      <Row TypeID="57486" Name="Life Support Backup Unit (Runs: 67)" Needed="200" Cycles="67" Produced="201" Excess="1" Remaining="200" ME="0" Notes="" />
+      <Row TypeID="17769" Name="Fluxed Condensates (Runs: 1)" Needed="100" Cycles="1" Produced="200" Excess="100" Remaining="100" ME="0" Notes="" />
+      <Row TypeID="57462" Name="Sense-Heuristic Neurolink Enhancer (Runs: 4)" Needed="80" Cycles="4" Produced="80" Excess="0" Remaining="80" ME="0" Notes="" />
+      <Row TypeID="17317" Name="Fermionic Condensates (Runs: 1)" Needed="80" Cycles="1" Produced="200" Excess="120" Remaining="80" ME="0" Notes="" />
+      <Row TypeID="57461" Name="Cogni-Emotive Neurolink Enhancer (Runs: 4)" Needed="80" Cycles="4" Produced="80" Excess="0" Remaining="80" ME="0" Notes="" />
+      <Row TypeID="57460" Name="Axosomatic Neurolink Enhancer (Runs: 4)" Needed="80" Cycles="4" Produced="80" Excess="0" Remaining="80" ME="0" Notes="" />
+      <Row TypeID="57479" Name="Core Temperature Regulator (Runs: 35)" Needed="35" Cycles="35" Produced="35" Excess="0" Remaining="35" ME="0" Notes="" />
+      <Row TypeID="57485" Name="Genetic Mutation Inhibitor (Runs: 25)" Needed="25" Cycles="25" Produced="25" Excess="0" Remaining="25" ME="0" Notes="" />
+      <Row TypeID="57484" Name="Genetic Structure Repairer (Runs: 25)" Needed="25" Cycles="25" Produced="25" Excess="0" Remaining="25" ME="0" Notes="" />
+      <Row TypeID="57481" Name="Genetic Lock Preserver (Runs: 25)" Needed="25" Cycles="25" Produced="25" Excess="0" Remaining="25" ME="0" Notes="" />
+      <Row TypeID="21011" Name="Capital Turret Hardpoint (Runs: 20)" Needed="20" Cycles="20" Produced="20" Excess="0" Remaining="20" ME="0" Notes="" />
+      <Row TypeID="21039" Name="Capital Siege Array (Runs: 20)" Needed="20" Cycles="20" Produced="20" Excess="0" Remaining="20" ME="0" Notes="" />
+      <Row TypeID="57466" Name="Ultradian-Cycling Neurolink Stabilizer (Runs: 2)" Needed="16" Cycles="2" Produced="20" Excess="4" Remaining="16" ME="0" Notes="" />
+      <Row TypeID="57470" Name="U-C Trigger Neurolink Conduit (Runs: 16)" Needed="16" Cycles="16" Produced="16" Excess="0" Remaining="16" ME="0" Notes="" />
+      <Row TypeID="57458" Name="Meta-Operant Neurolink Enhancer (Runs: 1)" Needed="10" Cycles="1" Produced="20" Excess="10" Remaining="10" ME="0" Notes="" />
+      <Row TypeID="21017" Name="Capital Armor Plates (Runs: 5)" Needed="5" Cycles="5" Produced="5" Excess="0" Remaining="5" ME="0" Notes="" />
+      <Row TypeID="24558" Name="Capital Ship Maintenance Bay (Runs: 5)" Needed="5" Cycles="5" Produced="5" Excess="0" Remaining="5" ME="0" Notes="" />
+      <Row TypeID="57482" Name="Genetic Safeguard Filter (Runs: 5)" Needed="5" Cycles="5" Produced="5" Excess="0" Remaining="5" ME="0" Notes="" />
+      <Row TypeID="21009" Name="Capital Propulsion Engine (Runs: 5)" Needed="5" Cycles="5" Produced="5" Excess="0" Remaining="5" ME="0" Notes="" />
+      <Row TypeID="21013" Name="Capital Sensor Cluster (Runs: 4)" Needed="4" Cycles="4" Produced="4" Excess="0" Remaining="4" ME="0" Notes="" />
+      <Row TypeID="21019" Name="Capital Capacitor Battery (Runs: 2)" Needed="2" Cycles="2" Produced="2" Excess="0" Remaining="2" ME="0" Notes="" />
+      <Row TypeID="57474" Name="Radar-FTL Interlink Communicator (Runs: 2)" Needed="2" Cycles="2" Produced="2" Excess="0" Remaining="2" ME="0" Notes="" />
+      <Row TypeID="24560" Name="Capital Corporate Hangar Bay (Runs: 2)" Needed="2" Cycles="2" Produced="2" Excess="0" Remaining="2" ME="0" Notes="" />
+      <Row TypeID="21037" Name="Capital Construction Parts (Runs: 2)" Needed="2" Cycles="2" Produced="2" Excess="0" Remaining="2" ME="0" Notes="" />
+      <Row TypeID="21035" Name="Capital Computer System (Runs: 2)" Needed="2" Cycles="2" Produced="2" Excess="0" Remaining="2" ME="0" Notes="" />
+      <Row TypeID="21025" Name="Capital Jump Drive (Runs: 2)" Needed="2" Cycles="2" Produced="2" Excess="0" Remaining="2" ME="0" Notes="" />
+      <Row TypeID="21021" Name="Capital Power Generator (Runs: 2)" Needed="2" Cycles="2" Produced="2" Excess="0" Remaining="2" ME="0" Notes="" />
+      <Row TypeID="57480" Name="Programmable Purification Membrane (Runs: 1)" Needed="1" Cycles="1" Produced="1" Excess="0" Remaining="1" ME="0" Notes="" />
+      <Row TypeID="57487" Name="Capital Core Temperature Regulator (Runs: 1)" Needed="1" Cycles="1" Produced="1" Excess="0" Remaining="1" ME="0" Notes="" />
+      <Row TypeID="57483" Name="Neurolink Enhancer Reservoir (Runs: 1)" Needed="1" Cycles="1" Produced="1" Excess="0" Remaining="1" ME="0" Notes="" />
+      <Row TypeID="57488" Name="Neurolink Protection Cell (Runs: 1)" Needed="1" Cycles="1" Produced="1" Excess="0" Remaining="1" ME="0" Notes="" />
+    </BuildItems>
+    <BuyItems>
+      <Row TypeID="35" Name="Pyerite" Needed="9392350" Cycles="0" Produced="0" Excess="0" Remaining="9392350" ME="" Notes="" />
+      <Row TypeID="34" Name="Tritanium" Needed="2817500" Cycles="0" Produced="0" Excess="0" Remaining="2817500" ME="" Notes="" />
+      <Row TypeID="36" Name="Mexallon" Needed="2639700" Cycles="0" Produced="0" Excess="0" Remaining="2639700" ME="" Notes="" />
+      <Row TypeID="37" Name="Isogen" Needed="717900" Cycles="0" Produced="0" Excess="0" Remaining="717900" ME="" Notes="" />
+      <Row TypeID="38" Name="Nocxium" Needed="76201" Cycles="0" Produced="0" Excess="0" Remaining="76201" ME="" Notes="" />
+      <Row TypeID="16634" Name="Atmospheric Gases" Needed="70700" Cycles="0" Produced="0" Excess="0" Remaining="70700" ME="" Notes="" />
+      <Row TypeID="16633" Name="Hydrocarbons" Needed="70700" Cycles="0" Produced="0" Excess="0" Remaining="70700" ME="" Notes="" />
+      <Row TypeID="39" Name="Zydrine" Needed="36743" Cycles="0" Produced="0" Excess="0" Remaining="36743" ME="" Notes="" />
+      <Row TypeID="16273" Name="Liquid Ozone" Needed="26950" Cycles="0" Produced="0" Excess="0" Remaining="26950" ME="" Notes="" />
+      <Row TypeID="16636" Name="Silicates" Needed="22700" Cycles="0" Produced="0" Excess="0" Remaining="22700" ME="" Notes="" />
+      <Row TypeID="16635" Name="Evaporite Deposits" Needed="22700" Cycles="0" Produced="0" Excess="0" Remaining="22700" ME="" Notes="" />
+      <Row TypeID="40" Name="Megacyte" Needed="18438" Cycles="0" Produced="0" Excess="0" Remaining="18438" ME="" Notes="" />
+      <Row TypeID="16272" Name="Heavy Water" Needed="13090" Cycles="0" Produced="0" Excess="0" Remaining="13090" ME="" Notes="" />
+      <Row TypeID="17889" Name="Hydrogen Isotopes" Needed="9900" Cycles="0" Produced="0" Excess="0" Remaining="9900" ME="" Notes="" />
+      <Row TypeID="17887" Name="Oxygen Isotopes" Needed="9450" Cycles="0" Produced="0" Excess="0" Remaining="9450" ME="" Notes="" />
+      <Row TypeID="16274" Name="Helium Isotopes" Needed="8550" Cycles="0" Produced="0" Excess="0" Remaining="8550" ME="" Notes="" />
+      <Row TypeID="17888" Name="Nitrogen Isotopes" Needed="6750" Cycles="0" Produced="0" Excess="0" Remaining="6750" ME="" Notes="" />
+      <Row TypeID="30372" Name="Fullerite-C70" Needed="4900" Cycles="0" Produced="0" Excess="0" Remaining="4900" ME="" Notes="" />
+      <Row TypeID="30375" Name="Fullerite-C28" Needed="4700" Cycles="0" Produced="0" Excess="0" Remaining="4700" ME="" Notes="" />
+      <Row TypeID="30371" Name="Fullerite-C60" Needed="4600" Cycles="0" Produced="0" Excess="0" Remaining="4600" ME="" Notes="" />
+      <Row TypeID="30370" Name="Fullerite-C50" Needed="4500" Cycles="0" Produced="0" Excess="0" Remaining="4500" ME="" Notes="" />
+      <Row TypeID="30374" Name="Fullerite-C84" Needed="4500" Cycles="0" Produced="0" Excess="0" Remaining="4500" ME="" Notes="" />
+      <Row TypeID="30373" Name="Fullerite-C72" Needed="4000" Cycles="0" Produced="0" Excess="0" Remaining="4000" ME="" Notes="" />
+      <Row TypeID="2401" Name="Chiral Structures" Needed="3500" Cycles="0" Produced="0" Excess="0" Remaining="3500" ME="" Notes="" />
+      <Row TypeID="3645" Name="Water" Needed="3500" Cycles="0" Produced="0" Excess="0" Remaining="3500" ME="" Notes="" />
+      <Row TypeID="3683" Name="Oxygen" Needed="1694" Cycles="0" Produced="0" Excess="0" Remaining="1694" ME="" Notes="" />
+      <Row TypeID="16275" Name="Strontium Clathrates" Needed="1540" Cycles="0" Produced="0" Excess="0" Remaining="1540" ME="" Notes="" />
+      <Row TypeID="11399" Name="Morphite" Needed="1500" Cycles="0" Produced="0" Excess="0" Remaining="1500" ME="" Notes="" />
+      <Row TypeID="30376" Name="Fullerite-C32" Needed="1500" Cycles="0" Produced="0" Excess="0" Remaining="1500" ME="" Notes="" />
+      <Row TypeID="28699" Name="Malachite Mykoserocin" Needed="1440" Cycles="0" Produced="0" Excess="0" Remaining="1440" ME="" Notes="" />
+      <Row TypeID="28698" Name="Lime Mykoserocin" Needed="1440" Cycles="0" Produced="0" Excess="0" Remaining="1440" ME="" Notes="" />
+      <Row TypeID="9832" Name="Coolant" Needed="693" Cycles="0" Produced="0" Excess="0" Remaining="693" ME="" Notes="" />
+      <Row TypeID="2463" Name="Nanites" Needed="661" Cycles="0" Produced="0" Excess="0" Remaining="661" ME="" Notes="" />
+      <Row TypeID="2319" Name="Test Cultures" Needed="661" Cycles="0" Produced="0" Excess="0" Remaining="661" ME="" Notes="" />
+      <Row TypeID="30378" Name="Fullerite-C540" Needed="600" Cycles="0" Produced="0" Excess="0" Remaining="600" ME="" Notes="" />
+      <Row TypeID="2312" Name="Supertensile Plastics" Needed="536" Cycles="0" Produced="0" Excess="0" Remaining="536" ME="" Notes="" />
+      <Row TypeID="3775" Name="Viral Agent" Needed="536" Cycles="0" Produced="0" Excess="0" Remaining="536" ME="" Notes="" />
+      <Row TypeID="30377" Name="Fullerite-C320" Needed="500" Cycles="0" Produced="0" Excess="0" Remaining="500" ME="" Notes="" />
+      <Row TypeID="44" Name="Enriched Uranium" Needed="308" Cycles="0" Produced="0" Excess="0" Remaining="308" ME="" Notes="" />
+      <Row TypeID="3689" Name="Mechanical Parts" Needed="308" Cycles="0" Produced="0" Excess="0" Remaining="308" ME="" Notes="" />
+      <Row TypeID="16646" Name="Mercury" Needed="300" Cycles="0" Produced="0" Excess="0" Remaining="300" ME="" Notes="" />
+      <Row TypeID="2348" Name="Gel-Matrix Biopaste" Needed="300" Cycles="0" Produced="0" Excess="0" Remaining="300" ME="" Notes="" />
+      <Row TypeID="2346" Name="Synthetic Synapses" Needed="300" Cycles="0" Produced="0" Excess="0" Remaining="300" ME="" Notes="" />
+      <Row TypeID="16652" Name="Promethium" Needed="300" Cycles="0" Produced="0" Excess="0" Remaining="300" ME="" Notes="" />
+      <Row TypeID="16643" Name="Cadmium" Needed="200" Cycles="0" Produced="0" Excess="0" Remaining="200" ME="" Notes="" />
+      <Row TypeID="16644" Name="Platinum" Needed="200" Cycles="0" Produced="0" Excess="0" Remaining="200" ME="" Notes="" />
+      <Row TypeID="16637" Name="Tungsten" Needed="200" Cycles="0" Produced="0" Excess="0" Remaining="200" ME="" Notes="" />
+      <Row TypeID="28696" Name="Celadon Mykoserocin" Needed="160" Cycles="0" Produced="0" Excess="0" Remaining="160" ME="" Notes="" />
+      <Row TypeID="28701" Name="Viridian Mykoserocin" Needed="160" Cycles="0" Produced="0" Excess="0" Remaining="160" ME="" Notes="" />
+      <Row TypeID="28694" Name="Amber Mykoserocin" Needed="160" Cycles="0" Produced="0" Excess="0" Remaining="160" ME="" Notes="" />
+      <Row TypeID="28697" Name="Golden Mykoserocin" Needed="160" Cycles="0" Produced="0" Excess="0" Remaining="160" ME="" Notes="" />
+      <Row TypeID="28700" Name="Vermillion Mykoserocin" Needed="160" Cycles="0" Produced="0" Excess="0" Remaining="160" ME="" Notes="" />
+      <Row TypeID="28695" Name="Azure Mykoserocin" Needed="160" Cycles="0" Produced="0" Excess="0" Remaining="160" ME="" Notes="" />
+      <Row TypeID="2329" Name="Biocells" Needed="125" Cycles="0" Produced="0" Excess="0" Remaining="125" ME="" Notes="" />
+      <Row TypeID="16651" Name="Neodymium" Needed="100" Cycles="0" Produced="0" Excess="0" Remaining="100" ME="" Notes="" />
+      <Row TypeID="16653" Name="Thulium" Needed="100" Cycles="0" Produced="0" Excess="0" Remaining="100" ME="" Notes="" />
+      <Row TypeID="16647" Name="Caesium" Needed="100" Cycles="0" Produced="0" Excess="0" Remaining="100" ME="" Notes="" />
+      <Row TypeID="16650" Name="Dysprosium" Needed="100" Cycles="0" Produced="0" Excess="0" Remaining="100" ME="" Notes="" />
+      <Row TypeID="2361" Name="Hermetic Membranes" Needed="100" Cycles="0" Produced="0" Excess="0" Remaining="100" ME="" Notes="" />
+      <Row TypeID="9848" Name="Robotics" Needed="77" Cycles="0" Produced="0" Excess="0" Remaining="77" ME="" Notes="" />
+      <Row TypeID="9842" Name="Miniature Electronics" Needed="75" Cycles="0" Produced="0" Excess="0" Remaining="75" ME="" Notes="" />
+      <Row TypeID="2876" Name="Wetware Mainframe" Needed="44" Cycles="0" Produced="0" Excess="0" Remaining="44" ME="" Notes="" />
+      <Row TypeID="57445" Name="LM-Composite Molecular Condenser" Needed="38" Cycles="0" Produced="0" Excess="0" Remaining="38" ME="" Notes="" />
+      <Row TypeID="2872" Name="Self-Harmonizing Power Core" Needed="31" Cycles="0" Produced="0" Excess="0" Remaining="31" ME="" Notes="" />
+      <Row TypeID="2868" Name="Integrity Response Drones" Needed="25" Cycles="0" Produced="0" Excess="0" Remaining="25" ME="" Notes="" />
+      <Row TypeID="2870" Name="Organic Mortar Applicators" Needed="25" Cycles="0" Produced="0" Excess="0" Remaining="25" ME="" Notes="" />
+      <Row TypeID="57452" Name="Isotropic Deposition Guide" Needed="21" Cycles="0" Produced="0" Excess="0" Remaining="21" ME="" Notes="" />
+      <Row TypeID="25276" Name="Malachite Cytoserocin" Needed="20" Cycles="0" Produced="0" Excess="0" Remaining="20" ME="" Notes="" />
+      <Row TypeID="25277" Name="Lime Cytoserocin" Needed="20" Cycles="0" Produced="0" Excess="0" Remaining="20" ME="" Notes="" />
+      <Row TypeID="2867" Name="Broadcast Node" Needed="8" Cycles="0" Produced="0" Excess="0" Remaining="8" ME="" Notes="" />
+      <Row TypeID="57448" Name="AV-Composite Molecular Condenser" Needed="4" Cycles="0" Produced="0" Excess="0" Remaining="4" ME="" Notes="" />
+      <Row TypeID="2871" Name="Recursive Computing Module" Needed="4" Cycles="0" Produced="0" Excess="0" Remaining="4" ME="" Notes="" />
+      <Row TypeID="57446" Name="AG-Composite Molecular Condenser" Needed="4" Cycles="0" Produced="0" Excess="0" Remaining="4" ME="" Notes="" />
+      <Row TypeID="57447" Name="CV-Composite Molecular Condenser" Needed="4" Cycles="0" Produced="0" Excess="0" Remaining="4" ME="" Notes="" />
+      <Row TypeID="57450" Name="Electro-Neural Signaller" Needed="1" Cycles="0" Produced="0" Excess="0" Remaining="1" ME="" Notes="" />
+      <Row TypeID="57443" Name="Meta-Molecular Combiner" Needed="1" Cycles="0" Produced="0" Excess="0" Remaining="1" ME="" Notes="" />
+    </BuyItems>
+  </Project>
+</CurrentProjects>
